@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CCSSKT_Android_Base.iml" filepath="$PROJECT_DIR$/CCSSKT_Android_Base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ccbarleylibrary/ccbarleylibrary.iml" filepath="$PROJECT_DIR$/ccbarleylibrary/ccbarleylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ccchatlibrary/ccchatlibrary.iml" filepath="$PROJECT_DIR$/ccchatlibrary/ccchatlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ccdoclibrary/ccdoclibrary.iml" filepath="$PROJECT_DIR$/ccdoclibrary/ccdoclibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ccextramodulelibrary/ccextramodulelibrary.iml" filepath="$PROJECT_DIR$/ccextramodulelibrary/ccextramodulelibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssktbaselibrary/ssktbaselibrary.iml" filepath="$PROJECT_DIR$/ssktbaselibrary/ssktbaselibrary.iml" />
+    </modules>
+  </component>
+</project>

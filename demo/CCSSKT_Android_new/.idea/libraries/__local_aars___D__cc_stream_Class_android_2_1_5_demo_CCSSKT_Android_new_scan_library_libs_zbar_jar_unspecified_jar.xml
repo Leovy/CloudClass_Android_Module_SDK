@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="__local_aars__:D.\cc_stream\Class-android-2.1.5\demo\CCSSKT_Android_new\scan-library\libs\zbar.jar:unspecified@jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/scan-library/libs/zbar.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
