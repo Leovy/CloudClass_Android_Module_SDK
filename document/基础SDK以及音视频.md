@@ -399,6 +399,7 @@ public void setRegion(@NonNull CCStream stream, final CCAtlasCallBack<Void> call
 
 
 ### 1.4.9 获取城市节点列表
+
 此方法主要是获取到城市节点的列表
 ```javascript
  public void dispatch(String roomid,String userid,final CCAtlasCallBack<CCCityBean> callBack){
@@ -411,7 +412,7 @@ public void setRegion(@NonNull CCStream stream, final CCAtlasCallBack<Void> call
 | userid   | String  | 用户ID             | 必选     |
 | callBack | CCAtlasCallBack  | 回调      | 可选     |
 
-# 2. 直播间操作api
+# 2. 公有的SDK接口
 
 ## 2.1 主动调用事件
 
@@ -465,6 +466,11 @@ public void stopLive(final CCAtlasCallBack<Void> callBack)
 
 ```javascript
   public @Nullable ArrayList<CCUser> getUserList() {
+```
+### 2.1.5 资源释放接口，退出房间，需要释放资源
+
+```javascript
+   public void disconnectSocket() {
 ```
 
 ## 2.2 被动监听事件

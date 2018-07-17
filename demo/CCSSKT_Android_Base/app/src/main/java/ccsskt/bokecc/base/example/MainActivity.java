@@ -168,7 +168,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mSubscribeBtn.setSelected(false);
         mRtmpBtn.setSelected(false);
 
-//        ccAtlasClient.addAtlasObserver(mClientObserver);
+        ccAtlasClient.setOnNotifyStreamListener(mClientObserver);
         mDocViewManager = CCDocViewManager.getInstance();
 //        mBarLeyManager = BarLeyManager.getInstance();
 //        mBarLeyManager.setOnNotifyStreamListener(mClientObserver);

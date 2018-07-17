@@ -26,9 +26,6 @@ renh
 
 c0e8f11c-a953-11e5-9218-8f706abcb27f
 
-java
-dir
-
 AndroidManifest.xml
 file
 
@@ -62,6 +59,16 @@ guopf
 
 
 3489
+
+java
+dir
+
+jniLibs
+dir
+
+
+
+add
 
 res
 dir
