@@ -1,5 +1,5 @@
 # CloudClass_Android_FullFeature_SDK
-CC视频云课堂 Android端全功能版SDK
+CC视频云课堂 Android端组件化SDK
 
 [基础SDK以及音视频](https://github.com/CCVideo/CloudClass_Android_FullFeature_SDK/wiki/%E5%9F%BA%E7%A1%80SDK%E4%BB%A5%E5%8F%8A%E9%9F%B3%E8%A7%86%E9%A2%91)
 
