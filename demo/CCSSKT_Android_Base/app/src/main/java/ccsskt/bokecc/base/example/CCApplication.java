@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 
 import com.bokecc.sskt.base.CCAtlasClient;
 import com.bokecc.sskt.base.CCInteractSDK;
@@ -23,6 +24,11 @@ public class CCApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        audioManager.setSpeakerphoneOn(true);
+
         CCInteractSDK.init(this.getApplicationContext(), true);
         if (context == null) {
             context = new WeakReference<Context>(this);

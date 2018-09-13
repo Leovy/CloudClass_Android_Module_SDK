@@ -1,15 +1,15 @@
 10
 
 dir
-6502
-svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Base/app/src/main/res/drawable-xxhdpi
+7931
+svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Modu/app/src/main/res/drawable-xxhdpi
 svn://192.168.1.248:3380/om-dev
 
 
 
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 
 
 
@@ -26,17 +26,17 @@ guopf
 
 c0e8f11c-a953-11e5-9218-8f706abcb27f
 
-home_link_normal.png
+handup_cancel_normal.png
 file
 
 
 
 
-2018-01-15T08:07:23.511387Z
-d16df8e2d7909f5db971269e4423d22c
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-26T07:50:31.893260Z
+9e07260c376e2764acb95738859690b0
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-7986
+4775
 
 validate_room_icon.png
 file
@@ -66,11 +66,11 @@ file
 
 
 
-2018-01-15T08:07:23.515387Z
+2018-08-26T07:50:31.933262Z
 d9dd8cf2b456b32c3dee74f3c07946da
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 
@@ -100,11 +100,11 @@ file
 
 
 
-2018-01-15T08:07:23.518388Z
+2018-08-26T07:50:32.251281Z
 8ae911975047ab335d4837ea13c827e2
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 
@@ -128,17 +128,17 @@ has-props
 
 26226
 
-home_scan_pressed.png
+chat_copy_pressed.png
 file
 
 
 
 
-2018-01-15T08:07:23.541389Z
-0c54d7c9e3ca48cf916597fcb6a809ab
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-26T07:50:32.273282Z
+4848d4c0deb270a2c05df18b791502f7
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 
@@ -160,7 +160,7 @@ has-props
 
 
 
-6552
+3311
 
 title_back.png
 file
@@ -168,11 +168,11 @@ file
 
 
 
-2018-01-15T08:07:23.546389Z
+2018-08-26T07:50:31.974265Z
 7697075998506b8c73564cd7f4fa9d6c
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 
@@ -196,17 +196,17 @@ has-props
 
 389
 
-cc_txt.png
+chat_teacher_flag.png
 file
 
 
 
 
-2018-01-15T08:07:23.488386Z
-e34e0775a11f6fdd8ba653c15295f447
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-26T07:50:31.612244Z
+36273b0195dbbe690154fb034960c878
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 
@@ -228,7 +228,41 @@ has-props
 
 
 
-12053
+1993
+
+handup_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.028268Z
+f83d99a8f13423ca65a56a5f95b3fe57
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4603
 
 home_scan_normal.png
 file
@@ -236,11 +270,11 @@ file
 
 
 
-2018-01-15T08:07:23.494386Z
+2018-08-26T07:50:32.009267Z
 4d0179f63c5ec35664a55fbe0c05f930
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 
@@ -264,17 +298,527 @@ has-props
 
 6573
 
+exitfullscreen_normal.png
+file
+
+
+
+
+2018-08-26T07:50:31.632245Z
+aa8fb71a9b4334995c2d83089c7b341a
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3355
+
+student_mute_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.069270Z
+2b624bb06c7e4eb5170953561346622e
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5166
+
+chat_input.9.png
+file
+
+
+
+
+2018-08-26T07:50:32.049269Z
+f484fa523a3d29df2ae982a452b6624b
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+741
+
+handup_cancel_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:31.672248Z
+8fee9ad7eb4af814a8f896a6be827f65
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4706
+
+student_chat_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.089271Z
+e0cd4c03c8fe1aee8da2208bb8f2a97c
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4189
+
+fullscreen_normal.png
+file
+
+
+
+
+2018-08-26T07:50:31.689249Z
+9ef7558375146eded8a5279868201a0d
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3227
+
+maiing_normal.png
+file
+
+
+
+
+2018-08-26T07:50:31.709250Z
+1dc1139876e2faae731dcae721ce4276
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3950
+
+chat_copy_normal.png
+file
+
+
+
+
+2018-08-26T07:50:32.131274Z
+22afb9e44c4420b105eeb3d9cfcff2ef
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3421
+
+exitfullscreen_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.109273Z
+5e1fb404938b70bcf72aa22a3883aa81
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3298
+
+home_scan_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:31.752252Z
+0c54d7c9e3ca48cf916597fcb6a809ab
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6552
+
+queue_mai_normal.png
+file
+
+
+
+
+2018-08-26T07:50:32.172276Z
+7399538cbf2ea615a20c98a945a80434
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4160
+
+scenes_bg.jpg
+file
+
+
+
+
+2018-08-26T07:50:31.774253Z
+64f4652ff296e29cc9efe698326ea3f3
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+31675
+
+fullscreen_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.192277Z
+db7715da05058afe2339309c3c9821dd
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3204
+
+handup_normal.png
+file
+
+
+
+
+2018-08-26T07:50:31.833257Z
+1225dbee56ee47fdbfd87070f5abde25
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4612
+
+maiing_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.231280Z
+69be25f44896151654eeb003fd645ef7
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3897
+
 home_link_pressed.png
 file
 
 
 
 
-2018-01-15T08:07:23.500387Z
+2018-08-26T07:50:31.854258Z
 0331d90c6bd2645e4b38ae3b5208b0ed
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 
@@ -298,17 +842,323 @@ has-props
 
 7955
 
+student_chat_normal.png
+file
+
+
+
+
+2018-08-26T07:50:31.912261Z
+10784d2c65e3a8e17f07a6c4ff5e8948
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4234
+
+queue_mai_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:31.954264Z
+0d5fa12b909b6d659e37281583acbafe
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4252
+
+queuing_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:31.993266Z
+1dd800c9cf872b2cfe6faaf101615fad
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3174
+
+chat_open_img_normal.png
+file
+
+
+
+
+2018-08-26T07:50:31.651246Z
+1627f79b3dcb9eee8b4626fd138b36fd
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1016
+
+home_link_normal.png
+file
+
+
+
+
+2018-08-26T07:50:31.731251Z
+d16df8e2d7909f5db971269e4423d22c
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7986
+
+chat_open_img_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.151275Z
+42a54e951cdc07aaa550fb82906c6ef6
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+933
+
+cc_txt.png
+file
+
+
+
+
+2018-08-26T07:50:31.794255Z
+e34e0775a11f6fdd8ba653c15295f447
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12053
+
+queuing_normal.png
+file
+
+
+
+
+2018-08-26T07:50:31.814256Z
+6861d201ed468165450634a5e269f61a
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3131
+
+student_mute_normal.png
+file
+
+
+
+
+2018-08-26T07:50:32.212278Z
+04a47c01c0e4ea1ad790560e912bd9bf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5286
+
 edit_clear.png
 file
 
 
 
 
-2018-01-15T08:07:23.506387Z
+2018-08-26T07:50:31.874259Z
 01d1d40a84fb02e620383798c19b75b7
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 has-props
 
 

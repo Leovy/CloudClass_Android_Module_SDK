@@ -16,6 +16,9 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import ccsskt.bokecc.base.example.R;
 
+/**
+ * 作者 ${CC视频}.<br/>
+ */
 public abstract class TitleActivity<V extends TitleActivity.ViewHolder> extends BaseActivity {
 
     @BindView(R.id.id_title_tool_bar)

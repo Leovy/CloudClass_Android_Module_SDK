@@ -1,15 +1,15 @@
 10
 
 dir
-6502
-svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Base/app/src/main/java/ccsskt/bokecc/base/example/base
+8270
+svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Modu/app/src/main/java/ccsskt/bokecc/base/example/base
 svn://192.168.1.248:3380/om-dev
 
 
 
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 
 
 
@@ -26,17 +26,51 @@ guopf
 
 c0e8f11c-a953-11e5-9218-8f706abcb27f
 
+BaseRecycleAdapter.java
+file
+
+
+
+
+2018-08-26T07:50:37.285569Z
+2ce112b79b820b0a5402c8588320900c
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2622
+
 BaseActivity.java
 file
 
 
 
 
-2018-01-15T08:07:22.858350Z
-29e04dd59086df06bf31ac9aae22fb70
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-26T07:50:37.247566Z
+3ad4a82baab18c2d20b795af4076feed
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 
 
 
@@ -58,7 +92,7 @@ guopf
 
 
 
-4108
+4343
 
 TitleOptions.java
 file
@@ -66,11 +100,11 @@ file
 
 
 
-2018-01-15T08:07:22.850349Z
-9b5d10e833ac2a9abe2114793dc26821
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-26T07:50:37.257567Z
+ebb66114a4f0e37cb35dae84633ea17e
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 
 
 
@@ -92,7 +126,7 @@ guopf
 
 
 
-3120
+3119
 
 TitleActivity.java
 file
@@ -100,11 +134,11 @@ file
 
 
 
-2018-01-15T08:07:22.854350Z
-c29561f3763aeb2b4f0e45561348487c
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-26T07:50:37.271568Z
+7e6192e96e30f30c35f604a7be6fdac7
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 
 
 
@@ -126,5 +160,5 @@ guopf
 
 
 
-5639
+5675
 

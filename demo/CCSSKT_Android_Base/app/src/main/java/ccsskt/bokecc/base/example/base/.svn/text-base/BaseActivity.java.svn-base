@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bokecc.sskt.base.CCAtlasClient;
+import com.bokecc.sskt.base.bean.CCInteractBean;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ccsskt.bokecc.base.example.CCApplication;
@@ -19,7 +22,7 @@ import ccsskt.bokecc.base.example.HomeActivity;
 import ccsskt.bokecc.base.example.R;
 
 /**
- * 作者 ${郭鹏飞}.<br/>
+ * 作者 ${CC视频}.<br/>
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -32,6 +35,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private Unbinder mUnbinder;
 
     private Dialog mProgressDialog;
+    public CCAtlasClient ccAtlasClient;
+    protected CCInteractBean mCCInteractBean;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             mUnbinder = ButterKnife.bind(this);
             mRoot = getWindow().getDecorView().findViewById(android.R.id.content);
             mHandler = new Handler();
+            ccAtlasClient = CCAtlasClient.getInstance();
             initProgressDialog();
             onViewCreated();
         }

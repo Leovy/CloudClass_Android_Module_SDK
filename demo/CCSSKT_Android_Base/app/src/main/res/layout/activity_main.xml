@@ -151,6 +151,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="聊天"/>
+            <Button
+                android:id="@+id/id_publishmessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送消息"/>
         </LinearLayout>
 
     </ScrollView>

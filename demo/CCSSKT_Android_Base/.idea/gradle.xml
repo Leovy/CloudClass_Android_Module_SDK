@@ -9,10 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/ccbarleylibrary" />
-            <option value="$PROJECT_DIR$/ccchatlibrary" />
-            <option value="$PROJECT_DIR$/ccdoclibrary" />
-            <option value="$PROJECT_DIR$/ccextramodulelibrary" />
             <option value="$PROJECT_DIR$/ssktbaselibrary" />
           </set>
         </option>

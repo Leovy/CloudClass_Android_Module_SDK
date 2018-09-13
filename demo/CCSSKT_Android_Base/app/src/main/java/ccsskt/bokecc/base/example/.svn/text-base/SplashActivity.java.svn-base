@@ -5,6 +5,9 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import ccsskt.bokecc.base.example.base.BaseActivity;
+/**
+ * 作者 ${CC视频}.<br/>
+ */
 
 public class SplashActivity extends BaseActivity {
 

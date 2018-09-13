@@ -10,6 +10,9 @@ import ccsskt.bokecc.base.example.base.TitleActivity;
 import ccsskt.bokecc.base.example.base.TitleOptions;
 import ccsskt.bokecc.base.example.util.ParseMsgUtil;
 import ccsskt.bokecc.base.example.view.ClearEditLayout;
+/**
+ * 作者 ${CC视频}.<br/>
+ */
 
 public class LinkActivity extends TitleActivity<LinkActivity.LinkViewHolder> {
 
@@ -57,7 +60,7 @@ public class LinkActivity extends TitleActivity<LinkActivity.LinkViewHolder> {
 
         @OnClick(R.id.id_link_go)
         void go() {
-            String url = mClearEditLayout.getText();
+            String url = "https://class.csslcloud.net/index/talker/?roomid=A7487250A66C260F9C33DC5901307461&userid=83F203DAC2468694";
             if (TextUtils.isEmpty(url)) {
                 showToast("请输入链接");
                 return;

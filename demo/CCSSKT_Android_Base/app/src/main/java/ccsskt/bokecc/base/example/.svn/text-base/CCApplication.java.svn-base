@@ -4,13 +4,16 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 
+import com.bokecc.sskt.base.CCAtlasClient;
+import com.bokecc.sskt.base.CCInteractSDK;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.lang.ref.WeakReference;
 
 /**
- * 作者 ${郭鹏飞}.<br/>
+ * 作者 ${CC视频}.<br/>
  */
 public class CCApplication extends Application {
 
@@ -18,14 +21,18 @@ public class CCApplication extends Application {
 
     public static int mAppStatus = -1; // 表示 force_kill
     private static WeakReference<Context> context;
-
     @Override
     public void onCreate() {
         super.onCreate();
+
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        audioManager.setSpeakerphoneOn(true);
+
+        CCInteractSDK.init(this.getApplicationContext(), true);
         if (context == null) {
             context = new WeakReference<Context>(this);
         }
-
         CrashReport.initCrashReport(this, "b7622b541a", true);
     }
 

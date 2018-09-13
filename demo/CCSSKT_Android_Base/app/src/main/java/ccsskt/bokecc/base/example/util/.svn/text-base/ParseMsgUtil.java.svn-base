@@ -2,7 +2,10 @@ package ccsskt.bokecc.base.example.util;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.util.Log;
+
+import com.bokecc.sskt.base.CCAtlasClient;
 
 import ccsskt.bokecc.base.example.ValidateActivity;
 
@@ -10,14 +13,16 @@ import static android.content.ContentValues.TAG;
 import static ccsskt.bokecc.base.example.Config.mRole;
 import static ccsskt.bokecc.base.example.Config.mRoomId;
 import static ccsskt.bokecc.base.example.Config.mUserAccount;
-
+import static ccsskt.bokecc.base.example.Config.ServerUrl;
 /**
- * 作者 ${郭鹏飞}.<br/>
+ * 作者 ${CC视频}.<br/>
  */
 
 public class ParseMsgUtil {
 
-    private ParseMsgUtil() {}
+    private ParseMsgUtil() {
+
+    }
 
     public static void parseUrl(final Context context, String url, final ParseCallBack callBack) {
         try {
@@ -34,6 +39,7 @@ public class ParseMsgUtil {
             String hosts[] = (arr[0].substring("https://".length(), arr[0].length())).split("/");
             mRole = hosts[hosts.length - 1];
             mRole = mRole.substring(0, mRole.length());
+            ServerUrl = hosts[hosts.length - 3];
             switch (mRole) {
                 case "presenter":
                 case "talker":

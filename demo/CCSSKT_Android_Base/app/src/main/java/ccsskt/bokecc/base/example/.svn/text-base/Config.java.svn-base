@@ -1,7 +1,7 @@
 package ccsskt.bokecc.base.example;
 
 /**
- * 作者 ${郭鹏飞}.<br/>
+ * 作者 ${CC视频}.<br/>
  */
 
 public class Config {
@@ -10,6 +10,6 @@ public class Config {
     public static final String FORCE_KILL_VALUE = "force_kill";
     public static final long SPLASH_DELAY = 2 * 1000L;
 
-    public static String mRoomId, mUserAccount, mRole;
+    public static String mRoomId, mUserAccount, mRole,ServerUrl;
 
 }

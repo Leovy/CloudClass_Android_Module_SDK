@@ -1,15 +1,15 @@
 10
 
 dir
-6502
-svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Base/app/src/main/java/com/kaola/qrcodescanner/qrcode/view
+8270
+svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Modu/app/src/main/java/com/kaola/qrcodescanner/qrcode/view
 svn://192.168.1.248:3380/om-dev
 
 
 
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2018-01-15T08:07:22.491329Z
+2018-08-26T07:50:38.680648Z
 23cba947aaa83792835725a1c609570a
-2017-09-26T07:42:31.052205Z
-3572
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 
 
 

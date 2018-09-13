@@ -1,15 +1,15 @@
 10
 
 dir
-6502
-svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Base/app/src/main/res
+7931
+svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Modu/app/src/main/res
 svn://192.168.1.248:3380/om-dev
 
 
 
-2017-11-20T01:19:52.123312Z
-4345
-guopf
+2018-08-22T06:56:45.805657Z
+7877
+houbs
 
 
 
@@ -42,6 +42,9 @@ mipmap-hdpi
 dir
 
 mipmap-xxhdpi
+dir
+
+drawable-nodpi
 dir
 
 raw

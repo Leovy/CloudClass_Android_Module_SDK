@@ -22,6 +22,10 @@ import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
+/**
+ * 作者 ${CC视频}.<br/>
+ */
+
 @RuntimePermissions
 public class HomeActivity extends BaseActivity {
 

@@ -23,4 +23,5 @@
     <string name="validate_nickname">请输入昵称</string>
     <string name="validate_password">请输入密码</string>
     <string name="validate_room">进入房间</string>
+    <string name="validate_sort_mic">进入排麦</string>
 </resources>

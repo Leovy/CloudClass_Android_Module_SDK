@@ -29,4 +29,9 @@
     <color name="qr_code_finder_laser">#F27C19</color>
     <color name="qr_album_normal">#FFFFFF</color>
     <color name="qr_album_pressed">#666666</color>
+
+    <color name="colorItemNormal">#FFFFFF</color>
+    <color name="colorItemPressed">#DDDDDD</color>
+    <color name="colorItemTip">#333333</color>
+    <color name="colorItemValue">#666666</color>
 </resources>

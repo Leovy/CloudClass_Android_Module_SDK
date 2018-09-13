@@ -8,7 +8,8 @@ android {
         minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
-        versionName "3.0.0"
+        versionName "3.1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "arm64-v8a", "armeabi-v7a", "x86"
@@ -33,10 +34,10 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
-    compile files('libs/ccclassroom-base.jar')
-	compile files('libs/ccclassroom-docmodule.jar')
-	compile files('libs/ccclassroom-chatmodule.jar')
-	compile files('libs/ccclassroom-barleymodule.jar')
+//    compile project(':ssktbaselibrary')
+//    compile project(':ccdoclibrary')
+//    compile project(':ccbarleylibrary')
+//    compile project(':ccchatlibrary')
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     compile 'com.jakewharton:butterknife:8.4.0'
@@ -52,6 +53,18 @@ dependencies {
     compile 'com.google.zxing:core:3.2.1'
     compile 'rongi.rotate-layout:rotate-layout:3.0.0'
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.jph.takephoto:takephoto_library:4.0.3'
+
+    compile files('libs/ccclassroom-base.jar')
+    compile files('libs/ccclassroom-barleymodule.jar')
+    compile files('libs/ccclassroom-chatmodule.jar')
+    compile files('libs/ccclassroom-docmodule.jar')
+
+    compile('io.socket:socket.io-client:0.8.3') {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+
 }

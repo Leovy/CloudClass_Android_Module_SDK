@@ -6,11 +6,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Looper;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.bokecc.sskt.base.CCAtlasClient;
+import com.bokecc.sskt.base.CCInteractSDK;
 import com.bokecc.sskt.base.bean.CCUser;
 import com.bokecc.sskt.base.bean.ChatMsg;
 import com.bokecc.sskt.base.bean.ChatMsgHistory;
@@ -88,7 +93,7 @@ public class ChatActivity extends BaseActivity {
 
     private CCChatManager chatManager;
     private CCAtlasClient ccAtlasClient;
-
+    private DrawHandler mDrawHandler;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_chat;
@@ -106,8 +111,21 @@ public class ChatActivity extends BaseActivity {
         idChatList.setLayoutManager(new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mChatAdapter = new ChatAdapter(this, CCAtlasClient.TALKER);
         mChatEntities = new ArrayList<>();
-        //开启直播后才可以获取历史数据
+        //开启直播后才可以获取聊天信息历史数据
         chatManager.getChatHistory(chatMsgHistoryCCChatCallBack);
+        //开始直播的时候获取直播时间
+        chatManager.getLiveTime(new CCChatCallBack<String>() {
+            @Override
+            public void onSuccess(String s) {
+                Log.i("wdh", "onSuccess: " + s);
+                message("直播开始时间" + s);
+            }
+
+            @Override
+            public void onFailure(String err) {
+
+            }
+        });
 
         mChatAdapter.bindDatas(mChatEntities);
         idChatList.setAdapter(mChatAdapter);
@@ -137,7 +155,30 @@ public class ChatActivity extends BaseActivity {
             }
         });
     }
+    private void message(final String string){
+        Message msg = new Message();
+        msg.obj = string;
+        msg.what = 1;
+        mDrawHandler.sendMessage(msg);
 
+    }
+    private final class DrawHandler extends android.os.Handler {
+
+        DrawHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            pusher(msg.obj.toString());
+        }
+    }
+
+    private void pusher(String str){
+        Toast toast = Toast.makeText(this, str, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
     //聊天按钮点击事件
     @OnClick(R.id.id_chat)
     void chat() {
@@ -203,7 +244,7 @@ public class ChatActivity extends BaseActivity {
                 String imgPath = chatManager.getImageAbsolutePath(imageUri);
                 if (!TextUtils.isEmpty(imgPath)) {
                     try {
-                       compressBitmap(imgPath, chatManager.readPictureDegree(imgPath));
+                        compressBitmap(imgPath, chatManager.readPictureDegree(imgPath));
                     } catch (IOException e) {
                         showToast("图片加载失败");
                     }
@@ -213,7 +254,8 @@ public class ChatActivity extends BaseActivity {
                 break;
         }
     }
-        ArrayList<TImage> images = new ArrayList<>();
+
+    ArrayList<TImage> images = new ArrayList<>();
     CompressConfig config = new CompressConfig.Builder()
             .enableQualityCompress(false)
             .setMaxSize(5 * 1024)
@@ -229,7 +271,7 @@ public class ChatActivity extends BaseActivity {
         File file = new File(imgPath);
         TImage image = TImage.of(file.getAbsolutePath(), TImage.FromType.OTHER);
         images.add(image);
-        CompressImage compressImage = CompressImageImpl.of(this, config,
+        CompressImage compressImage = CompressImageImpl.of(CCInteractSDK.getInstance().getContext(), config,
                 images, new MyCompressListener(degree));
         compressImage.compress();
     }
@@ -279,7 +321,6 @@ public class ChatActivity extends BaseActivity {
 //            showToast("图片压缩失败,停止上传");
         }
     }
-
     //RecyclerView的滑动监听
     RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
         @Override

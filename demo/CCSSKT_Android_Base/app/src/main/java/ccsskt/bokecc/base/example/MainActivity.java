@@ -1,31 +1,45 @@
 package ccsskt.bokecc.base.example;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bokecc.ccdocview.CCDocViewManager;
 import com.bokecc.sskt.base.CCAtlasCallBack;
 import com.bokecc.sskt.base.CCAtlasClient;
+import com.bokecc.sskt.base.CCInteractSDK;
 import com.bokecc.sskt.base.CCStream;
 import com.bokecc.sskt.base.LocalStreamConfig;
+import com.bokecc.sskt.base.SubscribeRemoteStream;
 import com.bokecc.sskt.base.bean.CCInteractBean;
 import com.bokecc.sskt.base.bean.CCUser;
+import com.bokecc.sskt.base.bean.CCUserRoomStatus;
 import com.bokecc.sskt.base.bean.ChatMsg;
 import com.bokecc.sskt.base.exception.StreamException;
 import com.bokecc.sskt.base.renderer.CCSurfaceRenderer;
 import com.example.ccbarleylibrary.CCBarLeyManager;
 import com.example.ccbarleylibrary.CCBarLeyCallBack;
 import com.example.ccchatlibrary.CCChatManager;
+import com.intel.webrtc.base.LocalCameraStreamParameters;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.webrtc.RendererCommon;
+
+import java.util.logging.Handler;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -99,24 +113,24 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private CCAtlasClient.OnNotifyStreamListener mClientObserver = new CCAtlasClient.OnNotifyStreamListener() {
 
         @Override
-        public void onStreamAllowSub(CCStream stream) {
-            if (stream.isRemoteIsLocal()) { // 不订阅自己的本地流
+        public void onStreamAllowSub(SubscribeRemoteStream stream) {
+            if (stream.getRemoteStream().isRemoteIsLocal()) { // 不订阅自己的本地流
                 return;
             }
             Log.e(TAG, "onStreamAdded: [ " + stream.getStreamId() + " ]");
-            if (stream.getStreamType() != CCStream.REMOTE_MIX) {
+            if (stream.getRemoteStream().getStreamType() != CCStream.REMOTE_MIX) {
                 // 订阅
-                mStream = stream;
+                mStream = stream.getRemoteStream();
             }
         }
 
         @Override
-        public void onStreamRemoved(CCStream stream) {
-            Log.e(TAG, "onStreamRemoved: [ " + stream.getStreamId() + " ]");
-            if (stream.getStreamType() != CCStream.REMOTE_MIX) {
+        public void onStreamRemoved(SubscribeRemoteStream stream) {
+            Log.e(TAG, "onStreamRemoved: [ " + stream.getRemoteStream().getStreamId() + " ]");
+            if (stream.getRemoteStream().getStreamType() != CCStream.REMOTE_MIX) {
                 mStream = null;
                 try {
-                    ccAtlasClient.unSubscribeStream(stream, null);
+                    ccAtlasClient.unSubscribeStream(stream.getRemoteStream(), null);
                 } catch (StreamException e) {
                     e.printStackTrace();
                 }
@@ -144,6 +158,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private boolean isPublish = false;
 
     private String rtmp;
+    private DrawHandler mDrawHandler;
 
     @Override
     protected int getLayoutId() {
@@ -176,8 +191,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mCCChatManager.setOnChatListener(mChatList);
 
         initRenderer();
-
-        createLocalStream();
+        mDrawHandler = new DrawHandler(Looper.getMainLooper());
 
         mRootDrawer.addDrawerListener(this);
 
@@ -190,6 +204,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             public void onSuccess(CCInteractBean ccBaseBean) {
                 dismissProgress();
                 showToast("join room success");
+                createLocalStream();
 //                ccAtlasClient.onRoomDisconnect();
 //                ccAtlasClient.getToken(null);
             }
@@ -200,6 +215,71 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 showToast(errMsg);
             }
         });
+        //用户自己定义的socket事件
+        ccAtlasClient.setOnPublishMessageListener(mPublishMessage);
+        //人员加入房间/退出房间通知事件
+        ccAtlasClient.setOnUserRoomStatus(mUpdateUserList);
+        //人员在举手连麦模式下，举手通知事件
+        ccAtlasClient.setOnUserHand(mUserHand);
+    }
+
+    //人员在举手连麦模式下，举手通知事件
+    private CCAtlasClient.OnUserHand mUserHand = new CCAtlasClient.OnUserHand() {
+        @Override
+        public void UserHand(CCUser user) {
+            message(user.getUserName() + "举手了");
+        }
+    };
+
+    //人员加入房间/退出房间通知事件
+    private CCAtlasClient.OnUserRoomStatus mUpdateUserList = new CCAtlasClient.OnUserRoomStatus() {
+        @Override
+        public void OnExitRoomUser(CCUserRoomStatus ccUserRoomStatus) {
+            message(ccUserRoomStatus.getUserName() + "退出房间");
+        }
+
+        @Override
+        public void OnJoinRoomUser(CCUserRoomStatus ccUserRoomStatus) {
+            message(ccUserRoomStatus.getUserName() + "加入房间");
+        }
+    };
+
+    //用户监听自己设置的socket事件
+    private CCAtlasClient.OnPublishMessageListener mPublishMessage = new CCAtlasClient.OnPublishMessageListener() {
+        @Override
+        public void onPublishMessage(JSONObject object) {
+            try {
+                message(object.getString("action"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    private void message(final String string){
+        Message msg = new Message();
+        msg.obj = string;
+        msg.what = 1;
+        mDrawHandler.sendMessage(msg);
+
+    }
+
+    private final class DrawHandler extends android.os.Handler {
+
+        DrawHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+           pusher(msg.obj.toString());
+        }
+    }
+
+    private void pusher(String str){
+        Toast toast = Toast.makeText(this, str, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     private void initRenderer() {
@@ -215,10 +295,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     private void createLocalStream() {
-        LocalStreamConfig config = new LocalStreamConfig.LocalStreamConfigBuilder().build();
-        isFront = config.cameraType == LocalStreamConfig.CAMERA_FRONT;
         try {
-            mLocalStream = ccAtlasClient.createLocalStream(config);
+            ccAtlasClient.setCameraType(LocalCameraStreamParameters.CameraType.FRONT);
+            ccAtlasClient.createLocalStream(ccAtlasClient.getMediaMode());
         } catch (StreamException e) {
             showToast(e.getMessage());
         }
@@ -266,12 +345,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @OnClick(R.id.id_preview)
     void preview() {
-        if (mLocalStream != null) {
-            try {
-                mLocalStream.attach(mLocalRenderer);
-                mPreviewBtn.setEnabled(false);
-            } catch (StreamException ignored) {
-            }
+        try {
+            ccAtlasClient.attachLocalCameraStram(mLocalRenderer);
+            mPreviewBtn.setEnabled(false);
+        } catch (StreamException ignored) {
         }
     }
 
@@ -623,6 +700,19 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @OnClick(R.id.id_chat)
     void goChat() {
         go(ChatActivity.class);
+    }
+
+    @OnClick(R.id.id_publishmessage)
+    void goPublish() {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("action","nihao");
+            //用户自己定义socket事件
+            ccAtlasClient.sendPublishMessage(data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

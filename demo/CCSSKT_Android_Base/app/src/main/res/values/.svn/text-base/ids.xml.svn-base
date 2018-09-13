@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <item type="id" name="id_popup_window_outside_view"/>
+    <item type="id" name="id_popup_window_anim_view"/>
+    <item type="id" name="id_choose_dialog_cancel"/>
+    <item type="id" name="id_choose_dialog_ok"/>
+    <item type="id" name="id_choose_dialog_line"/>
+
     <item type="id" name="qrcode_camera_preview" />
 
     <item type="id" name="auto_focus"/>

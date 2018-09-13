@@ -7,22 +7,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.bokecc.sskt.base.net.EasyCall;
-import com.bokecc.sskt.base.net.EasyCallback;
-import com.bokecc.sskt.base.net.EasyOKHttp;
-import com.bokecc.sskt.base.net.EasyOptions;
-import com.bokecc.sskt.base.net.EasyResponse;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
+import com.bokecc.sskt.base.CCAtlasCallBack;
 import butterknife.BindView;
 import butterknife.OnClick;
 import ccsskt.bokecc.base.example.base.TitleActivity;
 import ccsskt.bokecc.base.example.base.TitleOptions;
-import ccsskt.bokecc.base.example.util.ParseUtil;
+/**
+ * 作者 ${CC视频}.<br/>
+ */
 
 public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateViewHolder> {
 
@@ -48,11 +40,7 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
     private String mRoomId;
     private String mUserAccount;
     private String mRole;
-
     private InputMethodManager imm;
-
-    private EasyOKHttp mEasyOKHttp;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,16 +73,25 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
                 }).
                 build();
         setTitleOptions(options);
-
-
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         mRoomId = getIntent().getStringExtra(KEY_ROOM_ID);
         mUserAccount = getIntent().getStringExtra(KEY_USER_ACCOUNT);
         mRole = getIntent().getStringExtra(KEY_USER_ROLE);
-
+//        mAtlasClient.changeServerDomain(Config.ServerUrl,"CHN",new CCAtlasCallBack<String>(){
+//
+//            @Override
+//            public void onSuccess(String s) {
+//                Log.i(TAG, "onBindViewHolder: " + s);
+//                ServerUrl = s;
+//            }
+//
+//            @Override
+//            public void onFailure(int errCode, String errMsg) {
+//
+//            }
+//        });
         showSoftboard();
-        mEasyOKHttp = new EasyOKHttp.Builder().baseUrl("https://ccapi.csslcloud.net/").build();
     }
 
     private Runnable mShowSoftboardRunnable = new Runnable() {
@@ -125,38 +122,54 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
 
         @OnClick(R.id.id_validate_room)
         void goRoom() {
+            showProgress();
             String nickname = getEditTextValue(mNickname);
             String password = getEditTextValue(mPassword);
-            Map<String, Object> params = new HashMap<>();
-            params.put("roomid", mRoomId);
-            params.put("userid", mUserAccount);
-            params.put("role", mRole.equals("talker") ? "1" : "0");
-            params.put("name", nickname);
-            params.put("password", password);
-            params.put("client", "1");
-            EasyOptions options = new EasyOptions.OKHttpOptionsBuilder().path("api/room/auth").params(params).build();
-            showProgress();
-            mEasyOKHttp.createCall("api/room/auth", options).enqueue(new EasyCallback() {
-                @Override
-                public void onResponse(EasyCall call, EasyResponse response) {
-                    try {
-                        dismissProgress();
-                        JSONObject object = ParseUtil.getJsonObj(response.string());
-                        String sessionid = object.getJSONObject("data").getString("sessionid");
-                        MainActivity.startSelf(ValidateActivity.this, sessionid, mRoomId, mUserAccount);
-                    } catch (Exception e) {
-                        showToast(e.getMessage());
-                    }
-                }
+            ccAtlasClient.login(mRoomId, mUserAccount, Integer.parseInt(mRole.equals("talker") ? "1" : "0"), nickname,
+                    password, new CCAtlasCallBack<String>() {
+                        @Override
+                        public void onSuccess(String Seesionid) {
+                            try {
+                                dismissProgress();
+                                MainActivity.startSelf(ValidateActivity.this, Seesionid, mRoomId, mUserAccount);
+                            } catch (Exception e) {
+                                showToast(e.getMessage());
+                            }
+                        }
 
-                @Override
-                public void onFailure(EasyCall call, Throwable t) {
-                    dismissProgress();
-                    showToast(t.getMessage());
-                }
-            });
+                        @Override
+                        public void onFailure(int errCode, String errMsg) {
+                            dismissProgress();
+                            showToast(errMsg);
+                        }
+                    });
         }
 
+        @OnClick(R.id.id_validate_sort_mic)
+        void goSortMicrophone() {
+            showProgress();
+            String nickname = getEditTextValue(mNickname);
+            String password = getEditTextValue(mPassword);
+            ccAtlasClient.login(mRoomId, mUserAccount, Integer.parseInt(mRole.equals("talker") ? "1" : "0"), nickname,
+                    password, new CCAtlasCallBack<String>() {
+                        @Override
+                        public void onSuccess(String Seesionid) {
+                            try {
+                                dismissProgress();
+                                SortMicrophoneActivity.startSelf(ValidateActivity.this, Seesionid, mRoomId,
+                                        mUserAccount);
+                            } catch (Exception e) {
+                                showToast(e.getMessage());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int errCode, String errMsg) {
+                            dismissProgress();
+                            showToast(errMsg);
+                        }
+                    });
+        }
     }
 
 }
