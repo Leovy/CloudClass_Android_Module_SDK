@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.bokecc.sskt.base.doc.RoomDocs;
 import com.github.rongi.rotate_layout.layout.RotateLayout;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import ccsskt.bokecc.base.example.base.BaseActivity;
 import ccsskt.bokecc.base.example.util.DensityUtil;
 
@@ -45,6 +48,8 @@ public class WhiteBoardActivity extends BaseActivity {
     ImageButton idDocFullscreen;
     @BindView(R.id.id_doc_exit_fullscreen)
     ImageButton idDocExitFullscreen;
+    @BindView(R.id.id_lecture_drag_child)
+    LinearLayout mDrawLayout;
 
     //基础SDK对象
     private CCAtlasClient ccAtlasClient;
@@ -74,13 +79,12 @@ public class WhiteBoardActivity extends BaseActivity {
 
         //监听直播状态
         ccAtlasClient.setOnClassStatusListener(onClassStatusListener);
-
         //1.设置画笔
-        idDocDisplay.setTouchInterceptor(false, 0);
+        idDocDisplay.setTouchInterceptor(true, 0);
+//        idDocDisplay.setGestureAction(false);
 
         //2.设置文档展示界面
         docViewManager.setDocHistory(idDocDisplay, idDocpptDisplay);
-
         //3.白板与ppt动画的交换
         idDocpptDisplay.setDocSetVisibility(idDocDisplay);
         idDocDisplay.setDocWebViewSetVisibility(idDocpptDisplay);
@@ -90,9 +94,13 @@ public class WhiteBoardActivity extends BaseActivity {
         int width = DensityUtil.getWidth(this);
         int height = width * 9 / 16;
         idDocDisplay.setWhiteboard(width, height,true);
+//        idDocDisplay.setGestureAction(false);
+
 
         params.height = height;
         idLectureDocArea.setLayoutParams(params);
+
+//        idDocDisplay.setGestureAction(true);
 
 
         //全屏白板
@@ -174,6 +182,7 @@ public class WhiteBoardActivity extends BaseActivity {
                 @Override
                 public void run() {
                     tvStart.setVisibility(View.GONE);
+                    mDrawLayout.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -184,11 +193,37 @@ public class WhiteBoardActivity extends BaseActivity {
                 @Override
                 public void run() {
                     tvStart.setVisibility(View.VISIBLE);
+                    mDrawLayout.setVisibility(View.GONE);
                     idDocDisplay.clearAll();
                 }
             });
         }
     };
+
+
+
+    @OnClick(R.id.id_lecture_draw_eraser)
+    void showEraser() {
+        idDocDisplay.setEraser(true);
+    }
+
+    @OnClick(R.id.id_lecture_draw_paint)
+    void showPaint() {
+        idDocDisplay.setEraser(false);
+        idDocDisplay.setGestureAction(false);
+    }
+
+    //点击撤销画笔按钮
+    @OnClick(R.id.id_lecture_draw_undo)
+    void doUndo() {
+        //撤销所有人的画笔
+        idDocDisplay.teacherUndo();
+    }
+
+    @OnClick(R.id.id_lecture_draw_gesture)
+    void showGesture() {
+        idDocDisplay.setGestureAction(true);
+    }
     @Override
     public void onBackPressed() {
         if(idDocDisplay != null){

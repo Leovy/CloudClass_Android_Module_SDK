@@ -1,7 +1,9 @@
 package ccsskt.bokecc.base.example.base;
 
 import android.app.Dialog;
+import android.bluetooth.BluetoothHeadset;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bokecc.sskt.base.CCAtlasClient;
+import com.bokecc.sskt.base.MyBroadcastReceiver;
 import com.bokecc.sskt.base.bean.CCInteractBean;
 
 import butterknife.ButterKnife;
@@ -37,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private Dialog mProgressDialog;
     public CCAtlasClient ccAtlasClient;
     protected CCInteractBean mCCInteractBean;
+    protected MyBroadcastReceiver mMyBroadcastReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +56,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             mHandler = new Handler();
             ccAtlasClient = CCAtlasClient.getInstance();
             initProgressDialog();
+            mMyBroadcastReceiver = MyBroadcastReceiver.getInstance();
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
+            intentFilter.addAction("android.intent.action.PHONE_STATE");
+            intentFilter.addAction("android.intent.action.HEADSET_PLUG");
+            registerReceiver(mMyBroadcastReceiver, intentFilter);
             onViewCreated();
         }
 

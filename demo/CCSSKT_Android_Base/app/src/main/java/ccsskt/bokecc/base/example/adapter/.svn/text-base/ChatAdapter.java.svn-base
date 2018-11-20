@@ -97,7 +97,8 @@ public class ChatAdapter extends BaseRecycleAdapter<BaseRecycleAdapter.BaseViewH
             // FIXME: 兼容我们直播客户端 请根据需求自己处理
             mUrlIndices.clear();
             final String realData = transformMsg(chatEntity.getMsg());
-            if (chatEntity.getUserRole() == CCAtlasClient.PRESENTER) {
+            if (chatEntity.getUserRole() == CCAtlasClient.PRESENTER || chatEntity.getUserRole()
+                    == CCAtlasClient.ASSISTANT) {
                 msg = NAME_TEACHER_FLAG + NAME_TEACHER_FLAG_DIV + chatEntity.getUserName() + NAME_B_CONTENT + realData;
                 offset = (NAME_TEACHER_FLAG + NAME_TEACHER_FLAG_DIV + chatEntity.getUserName() + NAME_B_CONTENT).length();
             } else {
@@ -105,7 +106,8 @@ public class ChatAdapter extends BaseRecycleAdapter<BaseRecycleAdapter.BaseViewH
                 offset = (chatEntity.getUserName() + NAME_B_CONTENT).length();
             }
             SpannableString ss = new SpannableString(msg);
-            if (chatEntity.getUserRole() == CCAtlasClient.PRESENTER) {
+            if (chatEntity.getUserRole() == CCAtlasClient.PRESENTER ||chatEntity.getUserRole() ==
+                    CCAtlasClient.ASSISTANT) {
                 ImageSpan imageSpan = new ImageSpan(mTeacherFlag, ImageSpan.ALIGN_BOTTOM);
                 ss.setSpan(imageSpan, 0, NAME_TEACHER_FLAG.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
             }
@@ -121,7 +123,7 @@ public class ChatAdapter extends BaseRecycleAdapter<BaseRecycleAdapter.BaseViewH
                     offset,
                     msg.length(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            if (mRole == CCAtlasClient.PRESENTER && !chatEntity.isSelf()) {
+            if (mRole == CCAtlasClient.PRESENTER  || mRole == CCAtlasClient.ASSISTANT && !chatEntity.isSelf()) {
                 ss.setSpan(new NameClickSpan(position), 0, offset, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 //            Pattern pattern = Pattern.compile("((http|https)://|(www))(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?");
@@ -154,17 +156,17 @@ public class ChatAdapter extends BaseRecycleAdapter<BaseRecycleAdapter.BaseViewH
                 ((ChatImageViewHolder) holder).mName.setTextColor(Color.parseColor("#FFF27C19"));
             }
             String msg;
-            if (chatEntity.getUserRole() == CCAtlasClient.PRESENTER) {
+            if (chatEntity.getUserRole() == CCAtlasClient.PRESENTER || chatEntity.getUserRole() == CCAtlasClient.ASSISTANT ) {
                 msg = NAME_TEACHER_FLAG + NAME_TEACHER_FLAG_DIV + chatEntity.getUserName();
             } else {
                 msg = chatEntity.getUserName();
             }
             SpannableString ss = new SpannableString(msg);
-            if (chatEntity.getUserRole() == CCAtlasClient.PRESENTER) {
+            if (chatEntity.getUserRole() == CCAtlasClient.PRESENTER || chatEntity.getUserRole() == CCAtlasClient.ASSISTANT) {
                 ImageSpan imageSpan = new ImageSpan(mTeacherFlag, ImageSpan.ALIGN_BOTTOM);
                 ss.setSpan(imageSpan, 0, NAME_TEACHER_FLAG.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
             }
-            if (mRole == CCAtlasClient.PRESENTER && !chatEntity.isSelf()) {
+            if (mRole == CCAtlasClient.PRESENTER || mRole == CCAtlasClient.ASSISTANT && !chatEntity.isSelf()) {
                 ss.setSpan(new NameClickSpan(position), 0, chatEntity.getUserName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             ((ChatImageViewHolder) holder).mName.setMovementMethod(LinkMovementMethod.getInstance());

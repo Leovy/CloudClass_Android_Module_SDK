@@ -1,15 +1,15 @@
 10
 
 dir
-7931
+9315
 svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Modu/app/src/main/res/drawable-xxhdpi
 svn://192.168.1.248:3380/om-dev
 
 
 
-2018-08-22T06:56:45.805657Z
-7877
-houbs
+2018-11-19T03:40:07.573490Z
+9314
+wangdh
 
 
 
@@ -94,40 +94,6 @@ has-props
 
 5822
 
-splash_bg.jpg
-file
-
-
-
-
-2018-08-26T07:50:32.251281Z
-8ae911975047ab335d4837ea13c827e2
-2018-08-22T06:56:45.805657Z
-7877
-houbs
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-26226
-
 chat_copy_pressed.png
 file
 
@@ -161,6 +127,40 @@ has-props
 
 
 3311
+
+splash_bg.jpg
+file
+
+
+
+
+2018-08-26T07:50:32.251281Z
+8ae911975047ab335d4837ea13c827e2
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+26226
 
 title_back.png
 file
@@ -230,40 +230,6 @@ has-props
 
 1993
 
-handup_pressed.png
-file
-
-
-
-
-2018-08-26T07:50:32.028268Z
-f83d99a8f13423ca65a56a5f95b3fe57
-2018-08-22T06:56:45.805657Z
-7877
-houbs
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4603
-
 home_scan_normal.png
 file
 
@@ -297,6 +263,40 @@ has-props
 
 
 6573
+
+handup_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.028268Z
+f83d99a8f13423ca65a56a5f95b3fe57
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4603
 
 exitfullscreen_normal.png
 file
@@ -332,40 +332,6 @@ has-props
 
 3355
 
-student_mute_pressed.png
-file
-
-
-
-
-2018-08-26T07:50:32.069270Z
-2b624bb06c7e4eb5170953561346622e
-2018-08-22T06:56:45.805657Z
-7877
-houbs
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5166
-
 chat_input.9.png
 file
 
@@ -399,6 +365,40 @@ has-props
 
 
 741
+
+student_mute_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.069270Z
+2b624bb06c7e4eb5170953561346622e
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5166
 
 handup_cancel_pressed.png
 file
@@ -434,40 +434,6 @@ has-props
 
 4706
 
-student_chat_pressed.png
-file
-
-
-
-
-2018-08-26T07:50:32.089271Z
-e0cd4c03c8fe1aee8da2208bb8f2a97c
-2018-08-22T06:56:45.805657Z
-7877
-houbs
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4189
-
 fullscreen_normal.png
 file
 
@@ -502,6 +468,40 @@ has-props
 
 3227
 
+student_chat_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.089271Z
+e0cd4c03c8fe1aee8da2208bb8f2a97c
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4189
+
 maiing_normal.png
 file
 
@@ -535,6 +535,40 @@ has-props
 
 
 3950
+
+home_scan_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:31.752252Z
+0c54d7c9e3ca48cf916597fcb6a809ab
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6552
 
 chat_copy_normal.png
 file
@@ -604,40 +638,6 @@ has-props
 
 3298
 
-home_scan_pressed.png
-file
-
-
-
-
-2018-08-26T07:50:31.752252Z
-0c54d7c9e3ca48cf916597fcb6a809ab
-2018-08-22T06:56:45.805657Z
-7877
-houbs
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-6552
-
 queue_mai_normal.png
 file
 
@@ -706,17 +706,17 @@ has-props
 
 31675
 
-fullscreen_pressed.png
+teacher_doc_eraser_pressed.png
 file
 
 
 
 
-2018-08-26T07:50:32.192277Z
-db7715da05058afe2339309c3c9821dd
-2018-08-22T06:56:45.805657Z
-7877
-houbs
+2018-10-19T09:56:57.389000Z
+5d500a62a1a06c77d9c406dffb8eef3e
+2018-10-26T07:46:43.533138Z
+8907
+wangdh
 has-props
 
 
@@ -738,7 +738,7 @@ has-props
 
 
 
-3204
+989
 
 handup_normal.png
 file
@@ -773,6 +773,40 @@ has-props
 
 
 4612
+
+fullscreen_pressed.png
+file
+
+
+
+
+2018-08-26T07:50:32.192277Z
+db7715da05058afe2339309c3c9821dd
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3204
 
 maiing_pressed.png
 file
@@ -842,6 +876,40 @@ has-props
 
 7955
 
+draw_undo_normal.png
+file
+
+
+
+
+2018-11-12T07:11:00.154000Z
+653c4c9bd05681290fce66fdb2cc0036
+2018-11-19T03:40:07.573490Z
+9314
+wangdh
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+941
+
 student_chat_normal.png
 file
 
@@ -909,6 +977,40 @@ has-props
 
 
 4252
+
+draw_paint_normal.png
+file
+
+
+
+
+2018-10-19T09:56:54.259000Z
+81c0618fae53150f9cf321552706228c
+2018-10-26T07:46:43.533138Z
+8907
+wangdh
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+848
 
 queuing_pressed.png
 file
@@ -978,6 +1080,74 @@ has-props
 
 1016
 
+draw_undo_pressed.png
+file
+
+
+
+
+2018-11-12T07:10:57.912000Z
+bba5b52be66bbee49f28a1383d919bd3
+2018-11-19T03:40:07.573490Z
+9314
+wangdh
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+881
+
+teacher_doc_eraser_normal.png
+file
+
+
+
+
+2018-10-19T09:56:54.574000Z
+0619b84d08528b5e1a84466af34d7b40
+2018-10-26T07:46:43.533138Z
+8907
+wangdh
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+953
+
 home_link_normal.png
 file
 
@@ -1011,6 +1181,40 @@ has-props
 
 
 7986
+
+draw_paint_pressed.png
+file
+
+
+
+
+2018-10-19T09:56:56.098000Z
+506aead9d7e3c7f3b8145c47caf5dccb
+2018-10-26T07:46:43.533138Z
+8907
+wangdh
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+703
 
 chat_open_img_pressed.png
 file
@@ -1113,6 +1317,40 @@ has-props
 
 
 3131
+
+gesture_normal.png
+file
+
+
+
+
+2017-09-11T08:15:14.510000Z
+92403ceca0783423db3a2ac557c44f29
+2018-11-07T08:58:28.057688Z
+9083
+wangdh
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+610
 
 student_mute_normal.png
 file

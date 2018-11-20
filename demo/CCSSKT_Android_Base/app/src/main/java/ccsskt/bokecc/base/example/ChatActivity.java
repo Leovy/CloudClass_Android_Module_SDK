@@ -129,6 +129,7 @@ public class ChatActivity extends BaseActivity {
 
         mChatAdapter.bindDatas(mChatEntities);
         idChatList.setAdapter(mChatAdapter);
+        mDrawHandler = new DrawHandler(Looper.getMainLooper());
 
         //判断是否是禁言状态
         if (chatManager.isRoomGag() || chatManager.isGag()) {
@@ -179,6 +180,7 @@ public class ChatActivity extends BaseActivity {
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
+
     //聊天按钮点击事件
     @OnClick(R.id.id_chat)
     void chat() {

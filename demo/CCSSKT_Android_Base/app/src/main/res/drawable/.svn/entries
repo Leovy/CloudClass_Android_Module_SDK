@@ -1,15 +1,15 @@
 10
 
 dir
-7931
+9315
 svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Modu/app/src/main/res/drawable
 svn://192.168.1.248:3380/om-dev
 
 
 
-2018-08-22T06:56:45.805657Z
-7877
-houbs
+2018-11-19T03:40:07.573490Z
+9314
+wangdh
 
 
 
@@ -59,6 +59,40 @@ houbs
 
 
 272
+
+draw_undo.xml
+file
+
+
+
+
+2018-11-12T07:10:53.166000Z
+a03a65196adce56a4fad84dd7bfb3d27
+2018-11-19T03:40:07.573490Z
+9314
+wangdh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+266
 
 handup_cancel_selector.xml
 file
@@ -195,6 +229,74 @@ houbs
 
 
 272
+
+draw_paint.xml
+file
+
+
+
+
+2018-10-19T09:56:43.330000Z
+74f27e951b59ddf9e66a0c928bc6305d
+2018-10-26T07:46:43.533138Z
+8907
+wangdh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+268
+
+draw_bar_bg.xml
+file
+
+
+
+
+2018-10-19T09:56:44.039000Z
+0a492a5d950df70d46e4b350d93dbc5f
+2018-10-26T07:46:43.533138Z
+8907
+wangdh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+190
 
 round_btn.xml
 file
@@ -400,17 +502,17 @@ houbs
 
 229
 
-qr_album_selector.xml
+teacher_doc_eraser.xml
 file
 
 
 
 
-2018-08-26T07:50:35.612473Z
-ccc6baf9d4c57d3c6d4c72c14131139d
-2018-08-22T06:56:45.805657Z
-7877
-houbs
+2018-11-06T10:29:37.252506Z
+f8b1a524101921885b8b8a0266b04306
+2018-11-07T08:58:28.057688Z
+9083
+wangdh
 
 
 
@@ -432,7 +534,7 @@ houbs
 
 
 
-252
+262
 
 fullscreen.xml
 file
@@ -467,6 +569,40 @@ houbs
 
 
 268
+
+qr_album_selector.xml
+file
+
+
+
+
+2018-08-26T07:50:35.612473Z
+ccc6baf9d4c57d3c6d4c72c14131139d
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+252
 
 maiing_selector.xml
 file

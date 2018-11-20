@@ -36,6 +36,12 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/queue_mai_selector" />
 
+            <Button
+                android:id="@+id/id_student_cancelHandUp"
+                android:layout_width="92dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/handup_cancel_normal" />
+
         </LinearLayout>
 
     </RelativeLayout>

@@ -8,6 +8,7 @@ import android.media.AudioManager;
 
 import com.bokecc.sskt.base.CCAtlasClient;
 import com.bokecc.sskt.base.CCInteractSDK;
+import com.bokecc.sskt.base.MyBroadcastReceiver;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.lang.ref.WeakReference;
@@ -21,14 +22,16 @@ public class CCApplication extends Application {
 
     public static int mAppStatus = -1; // 表示 force_kill
     private static WeakReference<Context> context;
+    private AudioManager audioManager;
     @Override
     public void onCreate() {
         super.onCreate();
 
-        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-        audioManager.setSpeakerphoneOn(true);
-
+//        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+//        audioManager.setSpeakerphoneOn(true);
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        MyBroadcastReceiver.getInstance().initial(audioManager);
         CCInteractSDK.init(this.getApplicationContext(), true);
         if (context == null) {
             context = new WeakReference<Context>(this);

@@ -5,13 +5,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bokecc.sskt.base.CCAtlasCallBack;
 import com.bokecc.sskt.base.CCAtlasClient;
@@ -25,6 +30,8 @@ import com.bokecc.sskt.base.renderer.CCSurfaceRenderer;
 import com.example.ccbarleylibrary.CCBarLeyManager;
 import com.example.ccbarleylibrary.CCBarLeyCallBack;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.webrtc.RendererCommon;
 
 import java.util.ArrayList;
@@ -75,7 +82,7 @@ public class SortMicrophoneActivity extends BaseActivity {
     private VideoAdapter mVideoAdapter;
     private CopyOnWriteArrayList<VideoStreamView> mVideoStreamViews = new CopyOnWriteArrayList<>();
     private CCStream mLocalStream;
-
+    private DrawHandler mDrawHandler;
     //跳转后的参数
     private static final String KEY_SESSION_ID = "session_id";
     private static final String KEY_USER_ACCOUNT = "user_account";
@@ -136,7 +143,7 @@ public class SortMicrophoneActivity extends BaseActivity {
         //初始化基础类
         barLeyManager = CCBarLeyManager.getInstance();
         barLeyManager.setOnNotifyStreamListener(onNotifyStreamListener);
-
+        mDrawHandler = new DrawHandler(Looper.getMainLooper());
         //recyclerView的设置
         mVideoAdapter = new VideoAdapter(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -156,6 +163,14 @@ public class SortMicrophoneActivity extends BaseActivity {
                 showToast("join room success");
                 subStream();
                 isStartLiving();
+                if (ccAtlasClient.getUserList() != null) {
+                    for (CCUser user :
+                            ccAtlasClient.getUserList()) {
+                        if (user.getLianmaiStatus() == ccAtlasClient.LIANMAI_STATUS_IN_MAI) {
+                            Log.i("wdh---?", "wdh------>onSuccess: " + user.getUserName());
+                        }
+                    }
+                }
             }
 
             @Override
@@ -167,6 +182,17 @@ public class SortMicrophoneActivity extends BaseActivity {
 
         //监听直播状态
         ccAtlasClient.setOnClassStatusListener(onClassStatusListener);
+        ccAtlasClient.setOnMediaListener(new CCAtlasClient.OnMediaListener() {
+            @Override
+            public void onAudio(String userid, boolean isAllowAudio, boolean isSelf) {
+
+            }
+
+            @Override
+            public void onVideo(String userid, boolean isAllowVideo, boolean isSelf) {
+
+            }
+        });
         //web 设置更改连麦模式后,APP接收状态013，对应自由连麦、举手、自动连麦
         barLeyManager.setOnSpeakModeUpdateListener(onLianmaiModeUpdateListener);
         //自由连麦和举手连麦会有，麦序的更新
@@ -175,7 +201,10 @@ public class SortMicrophoneActivity extends BaseActivity {
         barLeyManager.setOnNotifyMaiStatusLisnter(onNotifyMaiStatusLisnter);
         //举手状态时 ，监听老师的邀请还是取消邀请
         barLeyManager.setOnNotifyInviteListener(onNotifyInviteListener);
-
+        //学员取消举手连麦
+        barLeyManager.setOnCancelHandUpListener(onCancelHandUpListener);
+        //用户自己定义的socket事件
+        ccAtlasClient.setOnPublishMessageListener(mPublishMessage);
         //踢出房间
         barLeyManager.setOnKickOutListener(new CCBarLeyManager.OnKickOutListener() {
             @Override
@@ -187,6 +216,30 @@ public class SortMicrophoneActivity extends BaseActivity {
         });
     }
 
+    private void message(final String userName){
+        Message msg = new Message();
+        msg.obj = userName;
+        msg.what = 1;
+        mDrawHandler.sendMessage(msg);
+
+    }
+    private final class DrawHandler extends android.os.Handler {
+
+        DrawHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            pusher(msg.obj.toString());
+        }
+    }
+
+    private void pusher(String str){
+        Toast toast = Toast.makeText(this, str, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
 
     //举手点击事件
     @OnClick(R.id.id_student_handup)
@@ -244,7 +297,21 @@ public class SortMicrophoneActivity extends BaseActivity {
             }
         });
     }
+    //举手连麦模式，取消举手连麦
+    @OnClick(R.id.id_student_cancelHandUp)
+    void cancelHandUp() {
+        barLeyManager.handsUpCancel(new CCBarLeyCallBack<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mLianmaiStyle.setBackgroundResource(R.drawable.queue_mai_selector);
+            }
 
+            @Override
+            public void onFailure(String err) {
+
+            }
+        });
+    }
     //join
     CCAtlasCallBack<CCInteractBean> ccAtlasCallBack = new CCAtlasCallBack<CCInteractBean>() {
         @Override
@@ -364,11 +431,14 @@ public class SortMicrophoneActivity extends BaseActivity {
     CCBarLeyManager.OnQueueMaiUpdateListener onQueueMaiUpdateListener = new CCBarLeyManager.OnQueueMaiUpdateListener() {
         @Override
         public void onUpdateBarLeyStatus(ArrayList<CCUser> users) {
-            if (ccAtlasClient.getInteractBean().getLianmaiMode() == LIANMAI_MODE_NAMED) { // 点名连麦模式
+            Log.i("wdh--->", "onUpdateBarLeyStatus: " + users);
+            if(ccAtlasClient.getInteractBean() != null){
+                if (ccAtlasClient.getInteractBean().getLianmaiMode() == LIANMAI_MODE_NAMED) { // 点名连麦模式
 
-            } else { // 自由连麦模式
-                if (mMaiStatus == 1) { // 如果麦序发生变化 并且当前用户在麦序中 进行麦序计算
-                    sortUser(users);
+                } else { // 自由连麦模式
+                    if (mMaiStatus == 1) { // 如果麦序发生变化 并且当前用户在麦序中 进行麦序计算
+                        sortUser(users);
+                    }
                 }
             }
         }
@@ -464,6 +534,33 @@ public class SortMicrophoneActivity extends BaseActivity {
             //老师取消邀请
         }
     };
+    //学员取消举手
+    CCBarLeyManager.OnCancelHandUpListener onCancelHandUpListener = new CCBarLeyManager.OnCancelHandUpListener() {
+        @Override
+        public void OnCancelHandUp(String userId, String userName) {
+            Log.i("wdh", "onSuccess: " + userName);
+            JSONObject data = new JSONObject();
+            try {
+                data.put("userid",userId);
+                data.put("username",userName);
+                ccAtlasClient.sendPublishMessage(data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    //用户监听自己设置的socket事件
+    private CCAtlasClient.OnPublishMessageListener mPublishMessage = new CCAtlasClient.OnPublishMessageListener() {
+        @Override
+        public void onPublishMessage(JSONObject object) {
+            try {
+                message(object.getString("username") + "取消举手");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
     //更新连麦状态
     private void updateMaiButton(final int status) {
@@ -481,16 +578,18 @@ public class SortMicrophoneActivity extends BaseActivity {
                         mLianmaiStyle.setVisibility(View.VISIBLE);
                         break;
                     case MAI_STATUS_NORMAL:
-                        if (mHandup.getVisibility() == View.VISIBLE) {
-                            isAutoHandup = false;
-                            mHandup.setBackgroundResource(R.drawable.handup_selector);
-                        }
-                        if (ccAtlasClient.getInteractBean().getLianmaiMode() == LIANMAI_MODE_FREE) {
-                            mLianmaiStyle.setBackgroundResource(R.drawable.queue_mai_selector);
-                        } else if (ccAtlasClient.getInteractBean().getLianmaiMode() == LIANMAI_MODE_AUTO) {
-                            mLianmaiStyle.setVisibility(View.GONE);//自动连麦的时候不可以点击
-                        } else if (ccAtlasClient.getInteractBean().getLianmaiMode() == CCAtlasClient.LIANMAI_MODE_NAMED) {
-                            mLianmaiStyle.setBackgroundResource(R.drawable.queue_mai_selector);
+                        if(ccAtlasClient.getInteractBean() != null){
+                            if (mHandup.getVisibility() == View.VISIBLE) {
+                                isAutoHandup = false;
+                                mHandup.setBackgroundResource(R.drawable.handup_selector);
+                            }
+                            if (ccAtlasClient.getInteractBean().getLianmaiMode() == LIANMAI_MODE_FREE) {
+                                mLianmaiStyle.setBackgroundResource(R.drawable.queue_mai_selector);
+                            } else if (ccAtlasClient.getInteractBean().getLianmaiMode() == LIANMAI_MODE_AUTO) {
+                                mLianmaiStyle.setVisibility(View.GONE);//自动连麦的时候不可以点击
+                            } else if (ccAtlasClient.getInteractBean().getLianmaiMode() == CCAtlasClient.LIANMAI_MODE_NAMED) {
+                                mLianmaiStyle.setBackgroundResource(R.drawable.queue_mai_selector);
+                            }
                         }
                         break;
                     case MAI_STATUS_QUEUE:

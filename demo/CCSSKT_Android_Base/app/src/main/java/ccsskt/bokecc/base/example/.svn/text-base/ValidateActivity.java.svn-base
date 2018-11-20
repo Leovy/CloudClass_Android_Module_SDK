@@ -156,8 +156,7 @@ public class ValidateActivity extends TitleActivity<ValidateActivity.ValidateVie
                         public void onSuccess(String Seesionid) {
                             try {
                                 dismissProgress();
-                                SortMicrophoneActivity.startSelf(ValidateActivity.this, Seesionid, mRoomId,
-                                        mUserAccount);
+                                SortMicrophoneActivity.startSelf(ValidateActivity.this, Seesionid, mRoomId, mUserAccount);
                             } catch (Exception e) {
                                 showToast(e.getMessage());
                             }

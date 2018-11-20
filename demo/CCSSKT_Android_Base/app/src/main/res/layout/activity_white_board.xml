@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-
         <RelativeLayout
             android:id="@+id/id_lecture_doc_area"
             android:layout_width="match_parent"
@@ -54,6 +53,47 @@
             </RelativeLayout>
         </RelativeLayout>
     </com.github.rongi.rotate_layout.layout.RotateLayout>
+
+    <LinearLayout
+        android:id="@+id/id_lecture_drag_child"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/draw_bar_bg"
+        android:orientation="horizontal"
+        android:paddingEnd="18dp"
+        android:paddingStart="18dp"
+        android:visibility="visible">
+
+        <ImageButton
+            android:id="@+id/id_lecture_draw_paint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/draw_paint" />
+
+        <ImageButton
+            android:id="@+id/id_lecture_draw_eraser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/teacher_doc_eraser"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/id_lecture_draw_gesture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/teacher_doc_eraser"/>
+        <ImageButton
+            android:id="@+id/id_lecture_draw_undo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/draw_undo" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_start"

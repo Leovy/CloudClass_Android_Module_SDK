@@ -1,15 +1,15 @@
 10
 
 dir
-7931
+9315
 svn://192.168.1.248:3380/om-dev/live/android/trunk/CCSSKT_Android_Modu/app/src/main/res/layout
 svn://192.168.1.248:3380/om-dev
 
 
 
-2018-08-22T06:56:45.805657Z
-7877
-houbs
+2018-11-19T03:40:07.573490Z
+9314
+wangdh
 
 
 
@@ -66,11 +66,11 @@ file
 
 
 
-2018-08-26T07:50:34.414404Z
-4b19f3cffd663ab556e1596fa517d449
-2018-08-22T06:56:45.805657Z
-7877
-houbs
+2018-10-26T02:14:45.070653Z
+bab02dd6a4da9580efec65cbf4b1f1ed
+2018-10-26T07:46:43.533138Z
+8907
+wangdh
 
 
 
@@ -92,41 +92,7 @@ houbs
 
 
 
-1951
-
-clear_edit_layout.xml
-file
-
-
-
-
-2018-08-26T07:50:34.444406Z
-5b595ae05815c7fb33c9421723df2498
-2018-08-22T06:56:45.805657Z
-7877
-houbs
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1426
+2204
 
 activity_qr_code.xml
 file
@@ -162,14 +128,14 @@ houbs
 
 2682
 
-copy_popup_layout.xml
+clear_edit_layout.xml
 file
 
 
 
 
-2018-08-26T07:50:34.472408Z
-d8af42654ca4b43bcb4196e3401e3caa
+2018-08-26T07:50:34.444406Z
+5b595ae05815c7fb33c9421723df2498
 2018-08-22T06:56:45.805657Z
 7877
 houbs
@@ -194,7 +160,7 @@ houbs
 
 
 
-326
+1426
 
 chat_item_layout.xml
 file
@@ -230,14 +196,14 @@ houbs
 
 1688
 
-choose_item_layout.xml
+copy_popup_layout.xml
 file
 
 
 
 
-2018-08-26T07:50:34.499409Z
-fbf1630c2ea768fbd9ae11de0484286e
+2018-08-26T07:50:34.472408Z
+d8af42654ca4b43bcb4196e3401e3caa
 2018-08-22T06:56:45.805657Z
 7877
 houbs
@@ -262,7 +228,7 @@ houbs
 
 
 
-525
+326
 
 activity_chat.xml
 file
@@ -297,6 +263,40 @@ houbs
 
 
 4422
+
+choose_item_layout.xml
+file
+
+
+
+
+2018-08-26T07:50:34.499409Z
+fbf1630c2ea768fbd9ae11de0484286e
+2018-08-22T06:56:45.805657Z
+7877
+houbs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+525
 
 activity_title.xml
 file
@@ -368,7 +368,7 @@ houbs
 
 activity_main.xml
 file
-8222
+
 
 
 
@@ -436,14 +436,14 @@ houbs
 
 activity_white_board.xml
 file
-8251
 
 
 
-2018-09-10T09:29:05.156329Z
-0687a55af9c48cdde562378bd0bc73fb
-2018-09-10T11:08:35.238066Z
-8251
+
+2018-11-18T06:59:06.188017Z
+b60434c172a2d896d215197ebceb716a
+2018-11-19T03:40:07.573490Z
+9314
 wangdh
 
 
@@ -466,7 +466,7 @@ wangdh
 
 
 
-2727
+4325
 
 activity_home.xml
 file

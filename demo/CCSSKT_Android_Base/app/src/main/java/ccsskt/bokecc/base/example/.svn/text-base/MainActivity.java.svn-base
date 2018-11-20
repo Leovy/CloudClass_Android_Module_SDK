@@ -114,9 +114,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         @Override
         public void onStreamAllowSub(SubscribeRemoteStream stream) {
-            if (stream.getRemoteStream().isRemoteIsLocal()) { // 不订阅自己的本地流
-                return;
-            }
+//            if (stream.getRemoteStream().isRemoteIsLocal()) { // 不订阅自己的本地流
+//                return;
+//            }
             Log.e(TAG, "onStreamAdded: [ " + stream.getStreamId() + " ]");
             if (stream.getRemoteStream().getStreamType() != CCStream.REMOTE_MIX) {
                 // 订阅
@@ -142,6 +142,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         }
     };
+
     private CCChatManager.OnChatListener mChatList = new CCChatManager.OnChatListener() {
         @Override
         public void onReceived(CCUser from, ChatMsg msg, boolean self) {
@@ -199,22 +200,42 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         final String userAccount = getIntent().getStringExtra(KEY_USER_ACCOUNT);
         rtmp = "rtmp://push-cc1.csslcloud.net/origin/" + getIntent().getStringExtra(KEY_ROOM_ID);
         showProgress();
-        ccAtlasClient.join(sessionid, userAccount, null, new CCAtlasCallBack<CCInteractBean>() {
-            @Override
-            public void onSuccess(CCInteractBean ccBaseBean) {
-                dismissProgress();
-                showToast("join room success");
-                createLocalStream();
-//                ccAtlasClient.onRoomDisconnect();
-//                ccAtlasClient.getToken(null);
-            }
 
-            @Override
-            public void onFailure(int errCode, String errMsg) {
-                dismissProgress();
-                showToast(errMsg);
-            }
-        });
+        ccAtlasClient.dispatch(getIntent().getStringExtra(KEY_ROOM_ID),getIntent().getStringExtra(KEY_USER_ACCOUNT),null);
+        ccAtlasClient.changeServerDomain(null, "HB", getIntent().getStringExtra(KEY_ROOM_ID),
+                userAccount, new CCAtlasCallBack<Void>() {
+                    @Override
+                    public void onSuccess(Void s) {
+                        ccAtlasClient.join(sessionid, userAccount, null, new CCAtlasCallBack<CCInteractBean>() {
+                            @Override
+                            public void onSuccess(CCInteractBean ccBaseBean) {
+                                dismissProgress();
+                                showToast("join room success");
+                                createLocalStream();
+                                if (ccAtlasClient.getUserList() != null) {
+                                    for (CCUser user :
+                                            ccAtlasClient.getUserList()) {
+                                        if (user.getLianmaiStatus() == ccAtlasClient.LIANMAI_STATUS_IN_MAI) {
+                                            Log.i(TAG, "wdh------>onSuccess: " + user.getUserName());
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(int errCode, String errMsg) {
+                                dismissProgress();
+                                showToast(errMsg);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(int errCode, String errMsg) {
+
+                    }
+                });
+
         //用户自己定义的socket事件
         ccAtlasClient.setOnPublishMessageListener(mPublishMessage);
         //人员加入房间/退出房间通知事件

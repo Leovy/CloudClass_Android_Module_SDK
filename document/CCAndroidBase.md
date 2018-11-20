@@ -1,9 +1,11 @@
 [TOC] 
 ## 1.概述
-提供云课堂基础SDK功能，包括推流，拉流等。为用户提供快速，简便的方法开展自己的实时互动课堂。
+提供云课堂基础SDK功能，包括推流，拉流，排麦组件，聊天以及白板组件。为用户提供快速，简便的方法开展自己的实时互动课堂。
 
 ### 1.1 功能特性
+安卓端SDK目前支持了音视频sdk、白板插件、聊天插件以及排麦插件
 
+#### 1.1.1 音视频SDK功能
 | |  |  |
 | --- | --- | --- |
 | 功能特性 | 描述 | 备注 |
@@ -13,6 +15,32 @@
 | 前后摄像头切换 | 支持手机前后摄像头切换 |  |
 | 后台播放 | 支持直播退到后台只播放音频 |  |
 | 支持https协议 | 支持接口https请求 |  |
+
+#### 1.1.2 白板插件功能
+| |  |  |
+| --- | --- | --- |
+| 功能特性 | 描述 | 备注 |
+| 文档翻页 |支持接收服务端的文档翻页数据|		
+| PPT动画  |支持接收服务器的PPT动画数据|
+| 画笔功能  |支持画笔、清除、撤销、历史数据|
+| 授权标注功能  |学生被授权，支持画笔功能|
+| 设为讲师功能  |学生被设为讲师，支持画笔、清除、翻页ppt|
+
+#### 1.1.3 聊天插件功能
+| |  |  |
+| --- | --- | --- |
+| 功能特性 | 描述 | 备注 |
+| 文本、表情发送 |支持接收服务端的文本和表情数据|		
+| 图片发送       |支持接收服务器的图片数据|
+| 禁言          |分为指定用户的禁言，以及全体禁言|
+
+#### 1.1.3 排麦插件功能
+| |  |  |
+| --- | --- | --- |
+| 功能特性 | 描述 | 备注 |
+| 自由连麦  |互动者可自由连麦,无需老师确认|		
+| 自动连麦  |互动者进入房间后自动连麦|
+| 举手连麦  |互动者可举手申请连麦,需老师确认才可连麦|
 
 ### 1.2 阅读对象
 本文档为技术文档，需要阅读者：
@@ -41,14 +69,17 @@ ccclassroom-base.jar已经混淆过，如果需要对应用进行混淆，需要
 
 ## 3.快速集成
 
-注：快速集成主要提供的是推流和拉流的功能(核心功能)。
+注：快速集成主要提供的是推流和拉流的功能(核心功能)。白板、聊天以及排麦组件另有开发文档描述。
 
 首先，需要下载最新版本的SDK，下载地址为：
 
 ### 3.1 导入jar
 |            名称                            | 描述      |
 | :--------------------------------------- | :------- | 
-| ccclassroom-base.jar	 | CC基础SDK版本核心jar包	 | 
+| ccclassroom-base.jar	         | CC音视频核心jar包	 | 
+| ccclassroom-docmodule.jar	 | CC白板插件核心jar包	 | 
+| ccclassroom-chatmodule.jar	 | CC聊天插件核心jar包	 | 
+| ccclassroom-barleymodule.jar	 | CC排麦插件核心jar包	 | 
 
 ### 3.2 导入so
 |            名称                            | 描述      |
@@ -64,7 +95,9 @@ compile('io.socket:socket.io-client:0.8.3') {
     }
 compile 'com.squareup.okhttp3:okhttp:3.8.1'
 compile files('libs/ccclassroom-base.jar')
-
+compile files('libs/ccclassroom-docmodule.jar')
+compile files('libs/ccclassroom-chatmodule.jar')
+compile files('libs/ccclassroom-barleymodule.jar')
 ```
 ### 3.4初始化渲染器以及布局控件
 预览展示控件和订阅展示控件：
@@ -116,11 +149,11 @@ compile files('libs/ccclassroom-base.jar')
 ```
 ### 3.5 创建SDK实例
 
-创建SDK实例：
+创建音视频sdk实例以及流服务的监听：
 
 ```java
- mAtlasClient = new CCAtlasClient(this, Config.PUBLIC_KEY);
- mAtlasClient.addAtlasObserver(mClientObserver);
+ mAtlasClient = CCAtlasClient.getInstance();
+ mAtlasClient.setOnNotifyStreamListener(mClientObserver);
 ```
 系统代理回调：
 
@@ -137,18 +170,18 @@ compile files('libs/ccclassroom-base.jar')
                 return;
             }
             Log.e(TAG, "onStreamAdded: [ " + stream.getStreamId() + " ]");
-            if (stream.getStreamType() == CCStream.REMOTE_MIX) {
-                // 订阅
-                mStream = stream;
+            if (stream.getStreamType() == CCStream.REMOTE_MIX) { // 不订阅混合流         
+               return;
             }
+            mStream = stream;
         }
 
         @Override
         public void onStreamRemoved(CCStream stream) {
             Log.e(TAG, "onStreamRemoved: [ " + stream.getStreamId() + " ]");
-            if (stream.getStreamType() == CCStream.REMOTE_MIX) {
+            if (stream.getStreamType() != CCStream.REMOTE_MIX) {
                 mStream = null;
-                mAtlasClient.unsubcribe(stream, null);
+                mAtlasClient.unSubscribeStream(stream, null);
             }
         }
 
@@ -163,10 +196,9 @@ compile files('libs/ccclassroom-base.jar')
 
 ```java
   private void createLocalStream() {
-        LocalStreamConfig config = new LocalStreamConfig.LocalStreamConfigBuilder().build();
-        isFront = config.cameraType == LocalStreamConfig.CAMERA_FRONT;
         try {
-            mLocalStream = mAtlasClient.createLocalStream(config);
+            ccAtlasClient.setCameraType(LocalCameraStreamParameters.CameraType.FRONT);
+            ccAtlasClient.createLocalStream(ccAtlasClient.getMediaMode());
         } catch (StreamException e) {
             showToast(e.getMessage());
         }
@@ -273,7 +305,7 @@ mAtlasClient.join(sessionid, userAccount, new CCAtlasCallBack<CCBaseBean>() {
 
 下面代码是订阅流接口：
 ```java
- mAtlasClient.subscribe(mStream, new CCAtlasCallBack<CCStream>() {
+ mAtlasClient.SubscribeStream(mStream, new CCAtlasCallBack<CCStream>() {
              @Override
             public void onSuccess(CCStream stream) {
                dismissProgress();
@@ -298,7 +330,7 @@ mAtlasClient.join(sessionid, userAccount, new CCAtlasCallBack<CCBaseBean>() {
 
 下面是取消订阅流接口代码：
 ```java
-mAtlasClient.unsubcribe(mStream, new CCAtlasCallBack<Void>() {
+mAtlasClient.unSubscribeStream(mStream, new CCAtlasCallBack<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         dismissProgress();
@@ -373,11 +405,11 @@ mAtlasClient.unsubcribe(mStream, new CCAtlasCallBack<Void>() {
 
 从atlas服务端拉流：
 * 拉流方法 void subscribe() 
-* 拉流接口 mAtlasClient.subscribe(mStream, new CCAtlasCallBack<CCStream>())
+* 拉流接口 mAtlasClient.SubscribeStream(mStream, new CCAtlasCallBack<CCStream>())
 
 取消从atlas服务端拉流：
 * 取消拉流方法 void subscribe() 
-* 取消拉流接口 mAtlasClient.unsubcribe(mStream, new CCAtlasCallBack<Void>())
+* 取消拉流接口 mAtlasClient.unSubscribeStream(mStream, new CCAtlasCallBack<Void>())
 ### 4.6 添加RTMP推流/取消RTMP推流
 
 添加RTMP流到atlas服务端：
@@ -450,6 +482,24 @@ mAtlasClient.unsubcribe(mStream, new CCAtlasCallBack<Void>() {
 
 * 拍照方法void takePic()
 * 拍照接口mLocalRenderer.getBitmap(new CCSurfaceRenderer.OnShotCallback())
+
+### 4.13 白板和文档
+
+白板文档功能：
+* 白板文档的方法：
+* 白板文档组件的实体类：1、获取白板文档组件的实例：mDocViewManager = DocViewManager.getInstance(); 2、展示白板文档的控件：引用docview和webview控件
+
+### 4.14 聊天
+
+聊天功能：
+* 聊天的方法：
+* 聊天组件的实体类：1、获取聊天组件的实例：mChatManager = ChatManager.getInstance(); 2、监听聊天时间的文本、表情以及图片：mChatManager.setOnChatListener(mChatList);
+
+### 4.15排麦
+
+排麦功能：
+* 排麦方法：
+* 排麦组件的实例类： 1、获取排麦组件的实体类： mBarLeyManager = BarLeyManager.getInstance(); 2、监听排麦的流服务：mBarLeyManager.setOnNotifyStreamListener(mClientObserver);
 
 ## 5.API查询
 Doc目录打开index.html文件

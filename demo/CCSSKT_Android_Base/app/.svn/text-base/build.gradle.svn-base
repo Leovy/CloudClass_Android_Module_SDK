@@ -24,32 +24,32 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    api 'com.android.support:appcompat-v7:25.3.1'
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
+    api 'com.android.support:design:25.3.1'
+    api 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
-    compile project(':ssktbaselibrary')
-    compile project(':ccdoclibrary')
-    compile project(':ccbarleylibrary')
-    compile project(':ccchatlibrary')
-    compile 'com.tencent.bugly:crashreport:latest.release'
-    compile 'com.tencent.bugly:nativecrashreport:latest.release'
-    compile 'com.jakewharton:butterknife:8.4.0'
+    api project(':ssktbaselibrary')
+    api project(':ccdoclibrary')
+    api project(':ccbarleylibrary')
+    api project(':ccchatlibrary')
+    api 'com.tencent.bugly:crashreport:latest.release'
+    api 'com.tencent.bugly:nativecrashreport:latest.release'
+    api 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.github.hotchemi:permissionsdispatcher:2.4.0'
+    api 'com.github.hotchemi:permissionsdispatcher:2.4.0'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
-    compile('io.socket:socket.io-client:0.8.3') {
+    api('io.socket:socket.io-client:0.8.3') {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
-    compile 'com.google.zxing:core:3.2.1'
-    compile 'rongi.rotate-layout:rotate-layout:3.0.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
+    api 'com.squareup.okhttp3:okhttp:3.8.1'
+    api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    api 'com.google.zxing:core:3.2.1'
+    api 'rongi.rotate-layout:rotate-layout:3.0.0'
+    api 'org.greenrobot:eventbus:3.0.0'
 }
