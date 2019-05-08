@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by xian xueliang on 5/23/17 5:27 PM
+  ~ Copyright (c) 2017 Allinmd.cn All Rights Reserved.版权所有©北京欧应科技有限公司.
+  ~
+  ~ Last Modified 5/23/17 5:25 PM
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/campaignLinkagesListItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            tools:text="发的连接方式来开发建设的来访记录时代扣积分辅导辅导老师就发了" />
+    </FrameLayout>
+
+
+</FrameLayout>

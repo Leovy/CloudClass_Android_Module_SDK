@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by xian xueliang on 5/23/17 5:47 PM
+  ~ Copyright (c) 2017 Allinmd.cn All Rights Reserved.版权所有©北京欧应科技有限公司.
+  ~
+  ~ Last Modified 5/15/17 9:13 AM
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#FFFFFF"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.xianxueliang.uicomponent.SupportSlidingTabLayout
+            android:id="@+id/campaignLinkagesTabLayout"
+            android:layout_width="0dp"
+            android:layout_height="41dp"
+            android:layout_weight="1"
+            app:tl_selectedTextSize="14sp"
+            app:tl_unselectedTextSize="14sp"
+            app:tl_selectedTextStyle="normal"
+            app:tl_unselectedTextStyle="normal"
+            app:tl_textPaddingBottom="2dp"
+            app:tl_tab_padding="15dp"
+            app:tl_textSelectColor="#6483E9"
+            app:tl_textUnselectColor="#BBBBBB"
+            app:tl_indicator_color="#6483E9"
+            app:tl_indicator_width="19dp"
+            app:tl_indicator_height="2dp"
+            app:tl_indicator_corner_radius="3dp"
+            />
+
+        <TextView
+            android:id="@+id/campaignLinkagesSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="确定"
+            android:textSize="14sp"
+            android:textColor="#CCCCCC"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DFDFDF"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/campaignLinkagesViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

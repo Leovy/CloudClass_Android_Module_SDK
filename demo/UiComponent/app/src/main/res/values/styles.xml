@@ -1,0 +1,47 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+  </style>
+
+  <!--Default SupportSlidingTabLayout Style-->
+  <declare-styleable name="SupportSlidingTabLayout">
+    <attr name="tl_selectedTextStyle">
+      <flag name="normal" value="0" />
+      <flag name="bold" value="1" />
+      <flag name="italic" value="2" />
+    </attr>
+    <attr name="tl_unselectedTextStyle">
+      <flag name="normal" value="0" />
+      <flag name="bold" value="1" />
+      <flag name="italic" value="2" />
+    </attr>
+    <attr name="tl_selectedTextSize" format="dimension"/>
+    <attr name="tl_unselectedTextSize" format="dimension"/>
+    <attr name="tl_textSingleLine" format="boolean" />
+    <attr name="tl_textIncludeFontPadding" format="boolean" />
+    <attr name="tl_textPaddingTop" format="dimension" />
+    <attr name="tl_textPaddingBottom" format="dimension" />
+  </declare-styleable>
+
+  <declare-styleable name="LabelView">
+    <attr name="lv_maxLines" format="integer"/>
+    <attr name="lv_dividerSpacingHorizontal" format="dimension"/>
+    <attr name="lv_dividerSpacingVertical" format="dimension"/>
+    <attr name="lv_childMinWidthRatio" format="float"/>
+    <attr name="lv_childMaxWidthRatio" format="float"/>
+    <attr name="lv_childMinWidth" format="dimension"/>
+    <attr name="lv_childMaxWidth" format="dimension"/>
+    <attr name="android:gravity"/>
+    <attr name="android:layout_gravity"/>
+  </declare-styleable>
+
+  <style name="AnimBottom" parent="@android:style/Animation">
+    <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+    <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+  </style>
+</resources>
