@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/dotView"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginStart="6dp"
+        tools:background="#ff0000" />
+
+    <TextView
+        android:id="@+id/subscriptView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#222222"
+        android:textSize="14sp"
+        tools:text="4" />
+</LinearLayout>

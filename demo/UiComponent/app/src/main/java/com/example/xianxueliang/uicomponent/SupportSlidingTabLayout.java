@@ -34,8 +34,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 拓展{@link SlidingTabLayout}
- * Create by xianxueliang
+ * 拓展{@link SlidingTabLayout} Create by xianxueliang
  */
 public class SupportSlidingTabLayout extends SlidingTabLayout {
 
@@ -300,7 +299,7 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
   }
 
   @Nullable
-  private ViewPager getViewPager() {
+  public ViewPager getViewPager() {
     Field tField = requiredFieldByName("mViewPager");
     return ReflectionUtil.tryGetFieldValue(tField, this);
   }
@@ -323,7 +322,17 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
     return null;
   }
 
-  @SuppressWarnings("Guava")
+  public void eachTabView(@NonNull Consumer2 consumer) {
+    Objects.requireNonNull(consumer);
+    ViewGroup tabsContainer = getTabsContainer();
+    if (tabsContainer != null) {
+      for (int i = 0; i < tabsContainer.getChildCount(); i++) {
+        View tabView = tabsContainer.getChildAt(i);
+        consumer.accept(i, tabView);
+      }
+    }
+  }
+
   public void eachTabTextView(@NonNull Consumer<TextView> consumer) {
     Objects.requireNonNull(consumer);
     for (int i = 0; i < getTabCount(); i++) {
@@ -445,6 +454,10 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
 
   }
 
+  public interface Consumer2 {
+    void accept(@IntRange(from = 0) int index, @NonNull View view);
+  }
+
   private class DefaultPagerAdapter extends FragmentPagerAdapter {
 
     private @NonNull final List<Fragment> fragments;
@@ -483,11 +496,6 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
     @Override
     public int getItemPosition(@NonNull Object object) {
       return PagerAdapter.POSITION_NONE;
-    }
-
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-
     }
 
     public void add(int position, @NonNull String title, @NonNull Fragment fragment) {
