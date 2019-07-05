@@ -23,12 +23,29 @@ public class MainActivity extends AppCompatActivity {
     Collections.addAll(fragments, BlankFragment.newInstance(Color.RED),
         BlankFragment.newInstance(Color.YELLOW));
     tabLayout.setViewPager(vpContent,
-        new String[]{"手机验证登录", "登录"},
+        new String[]{"已下载", "下载中"},
         getSupportFragmentManager(),
         fragments
     );
+
+//    ArrayList<Fragment> fragments = new ArrayList<>();
+//    Collections.addAll(fragments, BlankFragment.newInstance(Color.RED));
+//    tabLayout.setViewPager(vpContent,
+//            new String[]{"已下载"},
+//            getSupportFragmentManager(),
+//            fragments
+//    );
 //    tabLayout.setCurrentTab(0);
 
-    DownloadTabHelper.use(tabLayout);
+    AlignBottomPlugin.apply(tabLayout);
+
+    DownloadTabPlugin helper = DownloadTabPlugin.apply(tabLayout);
+    helper.showDotAt(0);
+    helper.showSubscriptNumberAt(0, "19");
+    helper.showDotAt(1);
+    helper.showSubscriptNumberAt(1, "19");
+
+//    tabLayout.addTab("BLACK", BlankFragment.newInstance(Color.BLACK));
+//    tabLayout.addTab("CYAN", BlankFragment.newInstance(Color.CYAN));
   }
 }

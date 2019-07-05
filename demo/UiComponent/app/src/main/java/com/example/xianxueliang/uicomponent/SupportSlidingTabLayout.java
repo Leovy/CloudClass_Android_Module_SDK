@@ -17,6 +17,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.allin.basicres.utils.ReflectionUtil;
 import com.allin.basicres.utils.ViewUtils;
@@ -48,8 +49,9 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
   private boolean mTextIncludeFontPadding;
   private float mTextPaddingTop;
   private float mTextPaddingBottom;
+  private float mTextBottomMargin;
 
-  private OnTabAttributeUpdateListener onTabAttributeUpdateListener;
+  private final ArrayList<OnTabAttributeUpdateListener> onTabAttributeUpdateListeners = new ArrayList<>();
 
   public SupportSlidingTabLayout(Context context) {
     this(context, null);
@@ -82,6 +84,8 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
                       .getDimension(R.styleable.SupportSlidingTabLayout_tl_textPaddingTop, 0);
               mTextPaddingBottom = a
                       .getDimension(R.styleable.SupportSlidingTabLayout_tl_textPaddingBottom, 0);
+              mTextBottomMargin = a
+                      .getDimension(R.styleable.SupportSlidingTabLayout_tl_textBottomMargin, 0);
             });
 
     ViewUtils.runIfLaidOut(this,
@@ -154,7 +158,6 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
 
     Field titlesField = requiredFieldByName("mTitles");
     ArrayList<String> titles = ReflectionUtil.tryGetFieldValue(titlesField, this);
-    //noinspection Guava
     titles = Optional.fromNullable(titles).or(Lists.newArrayList());
     try {
       titles.add(position, title);
@@ -290,8 +293,16 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
                   tabTextView.getPaddingRight(),
                   Math.round(mTextPaddingBottom));
 
-          if (onTabAttributeUpdateListener != null) {
-            onTabAttributeUpdateListener.onAttributeUpdate(tabTextView, currentIndex, tabIndex);
+          RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tabTextView.getLayoutParams();
+          if (mTextBottomMargin != params.bottomMargin) {
+            params.bottomMargin = Math.round(mTextBottomMargin);
+            tabTextView.setLayoutParams(params);
+          }
+
+          if (!onTabAttributeUpdateListeners.isEmpty()) {
+            for (OnTabAttributeUpdateListener listener : onTabAttributeUpdateListeners) {
+              listener.onAttributeUpdate(tabTextView, currentIndex, tabIndex);
+            }
           }
         }
       }
@@ -437,8 +448,13 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
     }
   }
 
-  public void setOnTabAttributeUpdateListener(@Nullable OnTabAttributeUpdateListener onTabAttributeUpdateListener) {
-    this.onTabAttributeUpdateListener = onTabAttributeUpdateListener;
+  public void addOnTabAttributeUpdateListener(@NonNull OnTabAttributeUpdateListener onTabAttributeUpdateListener) {
+    Objects.requireNonNull(onTabAttributeUpdateListener);
+    synchronized (onTabAttributeUpdateListeners) {
+      if (!onTabAttributeUpdateListeners.contains(onTabAttributeUpdateListener)) {
+        onTabAttributeUpdateListeners.add(onTabAttributeUpdateListener);
+      }
+    }
   }
 
   /**

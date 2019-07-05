@@ -12,29 +12,22 @@ import android.widget.TextView
 import com.allin.basicres.utils.ViewUtils
 import me.jessyan.autosize.utils.AutoSizeUtils
 
-class DownloadTabHelper private constructor(private val tabLayout: SupportSlidingTabLayout) {
+class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidingTabLayout) {
 
     companion object {
 
         @JvmStatic
-        fun use(tabLayout: SupportSlidingTabLayout): DownloadTabHelper {
-            return DownloadTabHelper(tabLayout)
+        fun apply(tabLayout: SupportSlidingTabLayout): DownloadTabPlugin {
+            return DownloadTabPlugin(tabLayout)
         }
     }
 
-    init {
-        tabLayout.eachTabTextView { tabTextView ->
-            (tabTextView.parent as RelativeLayout).setPadding(
-                    AutoSizeUtils.dp2px(tabTextView.context, 16f),
-                    0, AutoSizeUtils.dp2px(tabTextView.context, 16f), 0
-            )
-            val params = tabTextView.layoutParams as RelativeLayout.LayoutParams
-            params.removeRule(RelativeLayout.CENTER_IN_PARENT)
-            params.addRule(RelativeLayout.CENTER_VERTICAL)
-            tabTextView.layoutParams = params
-        }
+    private val context: Context by lazy { tabLayout.context }
 
-        tabLayout.eachTabView { _, tabView ->
+    init {
+
+        tabLayout.eachTabView { index, tabView ->
+            tabView.setPadding(AutoSizeUtils.dp2px(context, 15f), 0, AutoSizeUtils.dp2px(context, 15f), 0)
             with(tabView as RelativeLayout) {
                 val pluginView = LayoutInflater.from(context).inflate(R.layout.layout_download_tab_plugin, null)
                 addView(pluginView, run {
@@ -42,20 +35,44 @@ class DownloadTabHelper private constructor(private val tabLayout: SupportSlidin
                             ViewGroup.LayoutParams.WRAP_CONTENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT
                     )
-                    params.addRule(RelativeLayout.END_OF, SupportSlidingTabLayout.ID_RES_TAB_TEXT_VIEW)
-                    params.addRule(RelativeLayout.CENTER_VERTICAL)
-                    params.marginStart = AutoSizeUtils.dp2px(context, 6f)
+                    params.marginStart = (tabView.getChildAt(0) as TextView).measuredWidth().toInt()
+                    params.marginStart += AutoSizeUtils.dp2px(context, 6f)
+                    params.topMargin = if (index == tabLayout.currentTab) {
+                        AutoSizeUtils.dp2px(context, 10f)
+                    } else {
+                        0
+                    }
                     params
                 })
                 ViewUtils.setVisibility(pluginView, View.GONE)
             }
         }
 
-        tabLayout.setOnTabAttributeUpdateListener { tabTextView, curIndex, tabIndex ->
+        tabLayout.addOnTabAttributeUpdateListener { tabTextView, curIndex, tabIndex ->
+
+            val layoutParams = tabTextView.layoutParams as RelativeLayout.LayoutParams
+            layoutParams.removeRule(RelativeLayout.CENTER_IN_PARENT)
+            layoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
+            tabTextView.layoutParams = layoutParams
+
+
             val subscriptView = (tabTextView.parent as ViewGroup).findSubscriptView()
             subscriptView.setTextColor(if (curIndex == tabIndex) Color.parseColor("#222222") else Color.parseColor("#777777"))
+
+            val pluginView = (tabTextView.parent as RelativeLayout).getChildAt(2)
+            val params = pluginView.layoutParams as RelativeLayout.LayoutParams
+            params.marginStart = tabTextView.measuredWidth().toInt()
+            params.marginStart += AutoSizeUtils.dp2px(context, 6f)
+            params.topMargin = if (curIndex == tabIndex) {
+                AutoSizeUtils.dp2px(context, 10f)
+            } else {
+                0
+            }
+            pluginView.layoutParams = params
         }
     }
+
+    private fun TextView.measuredWidth(): Float = paint.measureText(text.toString())
 
     private fun View.findDotView(): View = findViewById<View>(R.id.dotView)
 
@@ -101,7 +118,7 @@ class DownloadTabHelper private constructor(private val tabLayout: SupportSlidin
         val pluginView = (tabLayout.getTabTextViewAt(tabIndex)!!.parent as ViewGroup).getChildAt(2)
         val dotView = pluginView.findDotView()
         val subscriptView = pluginView.findSubscriptView()
-        dotView.background = redDotDrawable(dotView.context)
+        dotView.background = redDotDrawable(context)
         ViewUtils.setVisibility(dotView, View.VISIBLE)
 
         ViewUtils.setVisibility(pluginView, visibilityOfPluginView(dotView, subscriptView))

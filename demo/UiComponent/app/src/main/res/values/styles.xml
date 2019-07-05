@@ -26,6 +26,7 @@
     <attr name="tl_textIncludeFontPadding" format="boolean" />
     <attr name="tl_textPaddingTop" format="dimension" />
     <attr name="tl_textPaddingBottom" format="dimension" />
+    <attr name="tl_textBottomMargin" format="dimension" />
   </declare-styleable>
 
   <declare-styleable name="LabelView">

@@ -44,4 +44,30 @@
       android:background="@color/colorAccent"/>
   </LinearLayout>
 
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:background="#FFFF00">
+
+    <TextView
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_blank_fragment"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:background="@color/colorPrimary" />
+
+    <View
+        android:id="@+id/reft"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/left"
+        android:background="@color/colorAccent" />
+
+  </RelativeLayout>
+
 </LinearLayout>
