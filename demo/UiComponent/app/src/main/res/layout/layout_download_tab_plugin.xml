@@ -3,21 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <View
-        android:id="@+id/dotView"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginStart="6dp"
-        tools:background="#ff0000" />
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/subscriptView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:textColor="#222222"
         android:textSize="14sp"
-        tools:text="4" />
+        tools:text="4888888" />
+
+    <View
+        android:id="@+id/dotView"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="top"
+        android:layout_marginStart="-6dp"
+        tools:background="#ff0000" />
 </LinearLayout>

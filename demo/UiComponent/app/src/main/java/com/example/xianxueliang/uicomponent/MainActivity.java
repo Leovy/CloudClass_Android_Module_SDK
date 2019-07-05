@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
     AlignBottomPlugin.apply(tabLayout);
 
-    DownloadTabPlugin helper = DownloadTabPlugin.apply(tabLayout);
+    DownloadTabPluginApi helper = DownloadTabPlugin.apply(tabLayout);
     helper.showDotAt(0);
     helper.showSubscriptNumberAt(0, "19");
     helper.showDotAt(1);
-    helper.showSubscriptNumberAt(1, "19");
+    helper.showSubscriptNumberAt(1, "19000000000000000000");
 
 //    tabLayout.addTab("BLACK", BlankFragment.newInstance(Color.BLACK));
 //    tabLayout.addTab("CYAN", BlankFragment.newInstance(Color.CYAN));

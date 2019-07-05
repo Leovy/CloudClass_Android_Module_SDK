@@ -12,12 +12,15 @@ import android.widget.TextView
 import com.allin.basicres.utils.ViewUtils
 import me.jessyan.autosize.utils.AutoSizeUtils
 
-class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidingTabLayout) {
+/**
+ * SupportSlidingTabLayout Plugin: 用于下载模块
+ */
+class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidingTabLayout) : DownloadTabPluginApi {
 
     companion object {
 
         @JvmStatic
-        fun apply(tabLayout: SupportSlidingTabLayout): DownloadTabPlugin {
+        fun apply(tabLayout: SupportSlidingTabLayout): DownloadTabPluginApi {
             return DownloadTabPlugin(tabLayout)
         }
     }
@@ -113,7 +116,7 @@ class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidin
     /**
      * 在[tabIndex]的位置上显示红点
      */
-    fun showDotAt(tabIndex: Int) {
+    override fun showDotAt(tabIndex: Int) {
         checkTabIndex(tabIndex)
         val pluginView = (tabLayout.getTabTextViewAt(tabIndex)!!.parent as ViewGroup).getChildAt(2)
         val dotView = pluginView.findDotView()
@@ -127,7 +130,7 @@ class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidin
     /**
      * 在[tabIndex]的位置上隐藏红点
      */
-    fun hideDotAt(tabIndex: Int) {
+    override fun hideDotAt(tabIndex: Int) {
         checkTabIndex(tabIndex)
         val pluginView = (tabLayout.getTabTextViewAt(tabIndex)!!.parent as ViewGroup).getChildAt(2)
         val dotView = pluginView.findDotView()
@@ -140,7 +143,7 @@ class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidin
     /**
      * 在[tabIndex]的位置上显示角标数字[num],如果[num] is null,则不显示
      */
-    fun showSubscriptNumberAt(tabIndex: Int, num: String?) {
+    override fun showSubscriptNumberAt(tabIndex: Int, num: String?) {
         checkTabIndex(tabIndex)
         val pluginView = (tabLayout.getTabTextViewAt(tabIndex)!!.parent as ViewGroup).getChildAt(2)
         val dotView = pluginView.findDotView()
@@ -150,5 +153,19 @@ class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidin
 
         ViewUtils.setVisibility(pluginView, visibilityOfPluginView(dotView, subscriptView))
     }
+}
 
+interface DownloadTabPluginApi {
+    /**
+     * 在[tabIndex]的位置上显示红点
+     */
+    fun showDotAt(tabIndex: Int)
+    /**
+     * 在[tabIndex]的位置上隐藏红点
+     */
+    fun hideDotAt(tabIndex: Int)
+    /**
+     * 在[tabIndex]的位置上显示角标数字[num],如果[num] is null,则不显示
+     */
+    fun showSubscriptNumberAt(tabIndex: Int, num: String?)
 }
