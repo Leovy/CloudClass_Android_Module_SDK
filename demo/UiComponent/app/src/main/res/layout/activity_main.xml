@@ -13,6 +13,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginStart="0dp"
+      app:tl_tabViewPaddingLeft="15dp"
+      app:tl_tabViewPaddingEnd="15dp"
       app:tl_textBottomMargin="20dp"
       app:tl_indicator_color="#6483e9"
       app:tl_indicator_corner_radius="2dp"

@@ -20,7 +20,7 @@ class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidin
     companion object {
 
         @JvmStatic
-        fun apply(tabLayout: SupportSlidingTabLayout): DownloadTabPluginApi {
+        fun applyTo(tabLayout: SupportSlidingTabLayout): DownloadTabPluginApi {
             return DownloadTabPlugin(tabLayout)
         }
     }
@@ -30,7 +30,6 @@ class DownloadTabPlugin private constructor(private val tabLayout: SupportSlidin
     init {
 
         tabLayout.eachTabView { index, tabView ->
-            tabView.setPadding(AutoSizeUtils.dp2px(context, 15f), 0, AutoSizeUtils.dp2px(context, 15f), 0)
             with(tabView as RelativeLayout) {
                 val pluginView = LayoutInflater.from(context).inflate(R.layout.layout_download_tab_plugin, null)
                 addView(pluginView, run {

@@ -50,6 +50,8 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
   private float mTextPaddingTop;
   private float mTextPaddingBottom;
   private float mTextBottomMargin;
+  private float mTabViewPaddingLeft;
+  private float mTabViewPaddingEnd;
 
   private final ArrayList<OnTabAttributeUpdateListener> onTabAttributeUpdateListeners = new ArrayList<>();
 
@@ -86,6 +88,11 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
                       .getDimension(R.styleable.SupportSlidingTabLayout_tl_textPaddingBottom, 0);
               mTextBottomMargin = a
                       .getDimension(R.styleable.SupportSlidingTabLayout_tl_textBottomMargin, 0);
+              mTabViewPaddingLeft = a
+                      .getDimension(R.styleable.SupportSlidingTabLayout_tl_tabViewPaddingLeft, 0);
+              mTabViewPaddingEnd = a
+                      .getDimension(R.styleable.SupportSlidingTabLayout_tl_tabViewPaddingEnd, 0);
+
             });
 
     ViewUtils.runIfLaidOut(this,
@@ -278,8 +285,9 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
     int tc = getTabCount();
     if (tc > 0 && tabsContainer != null && tabsContainer.getChildCount() == tc) {
       for (int tabIndex = 0; tabIndex < tc; tabIndex++) {
-        View child = tabsContainer.getChildAt(tabIndex);
-        TextView tabTextView = child.findViewById(ID_RES_TAB_TEXT_VIEW);
+        View tabView = tabsContainer.getChildAt(tabIndex);
+        tabView.setPadding((int) mTabViewPaddingLeft, 0, (int) mTabViewPaddingEnd, 0);
+        TextView tabTextView = tabView.findViewById(ID_RES_TAB_TEXT_VIEW);
         if (tabTextView != null) {
           boolean isSelected = currentIndex == tabIndex;
           tabTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -364,6 +372,13 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
   }
 
   /**
+   * @return textSize in px
+   */
+  public float getSelectedTextSize() {
+    return mSelectedTextSize;
+  }
+
+  /**
    * 设置选中状态下tab的文字的大小
    *
    * @param textSize in px
@@ -373,6 +388,13 @@ public class SupportSlidingTabLayout extends SlidingTabLayout {
       mSelectedTextSize = textSize;
       updateTabTextAttribute(getCurrentTab());
     }
+  }
+
+  /**
+   * @return textSize in px
+   */
+  public float getUnselectedTextSize() {
+    return mUnselectedTextSize;
   }
 
   /**

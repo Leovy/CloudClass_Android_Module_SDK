@@ -2,15 +2,22 @@ package com.example.xianxueliang.uicomponent
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
+import android.support.v4.view.ViewPager
+import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import java.util.*
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 /**
- * Tab Title 底部对齐插件
+ * SupportSlidingTabLayout Plugins: Tab Title 底部对齐插件
  */
 class AlignBottomPlugin private constructor(tabLayout: SupportSlidingTabLayout) {
 
@@ -36,8 +43,8 @@ class AlignBottomPlugin private constructor(tabLayout: SupportSlidingTabLayout) 
                             }
 
 //                    tabContainer.addView(
-//                            View(context).apply { setBackgroundColor(Color.argb(55, 0, 0, 255)) },
-//                            RelativeLayout.LayoutParams(500, 500).apply {
+//                            View(context).applyTo { setBackgroundColor(Color.argb(55, 0, 0, 255)) },
+//                            RelativeLayout.LayoutParams(500, 500).applyTo {
 //                                //                                addRule(RelativeLayout.END_OF, SupportSlidingTabLayout.ID_RES_TAB_TEXT_VIEW)
 //                                marginStart = 500
 //                            }
@@ -55,12 +62,47 @@ class AlignBottomPlugin private constructor(tabLayout: SupportSlidingTabLayout) 
 
     companion object {
         @JvmStatic
-        fun apply(tabLayout: SupportSlidingTabLayout) {
+        fun applyTo(tabLayout: SupportSlidingTabLayout) {
             AlignBottomPlugin(tabLayout)
         }
 
         private fun runBlockForTest(@Suppress("UNUSED_PARAMETER") block: () -> Unit) {
 //            block()
+        }
+    }
+}
+
+/**
+ * SupportSlidingTabLayout Plugins: 平滑的缩放Tab Title插件
+ * Note:只有[SupportSlidingTabLayout.mSelectedTextSize] > [SupportSlidingTabLayout.mUnselectedTextSize]
+ * 的时候生效
+ */
+class SmoothScaleTitleSizePlugin private constructor(tabLayout: SupportSlidingTabLayout) {
+
+    init {
+        val maxTitleSize: Float = tabLayout.selectedTextSize
+        val minTitleSize: Float = tabLayout.unselectedTextSize
+
+        if (maxTitleSize > minTitleSize) {
+            tabLayout.viewPager!!.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                    if (position + 1 < tabLayout.tabCount) {
+
+                        val currentSize = (minTitleSize - maxTitleSize) * positionOffset + maxTitleSize
+                        tabLayout.getTabTextViewAt(position)!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, currentSize)
+
+                        val nextSize = (maxTitleSize - minTitleSize) * positionOffset + minTitleSize
+                        tabLayout.getTabTextViewAt(position + 1)!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, nextSize)
+                    }
+                }
+            })
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun applyTo(tabLayout: SupportSlidingTabLayout) {
+            SmoothScaleTitleSizePlugin(tabLayout)
         }
     }
 }

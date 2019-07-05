@@ -27,6 +27,8 @@
     <attr name="tl_textPaddingTop" format="dimension" />
     <attr name="tl_textPaddingBottom" format="dimension" />
     <attr name="tl_textBottomMargin" format="dimension" />
+    <attr name="tl_tabViewPaddingLeft" format="dimension" />
+    <attr name="tl_tabViewPaddingEnd" format="dimension" />
   </declare-styleable>
 
   <declare-styleable name="LabelView">

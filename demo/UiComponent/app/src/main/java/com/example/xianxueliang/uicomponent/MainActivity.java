@@ -21,9 +21,13 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Fragment> fragments = new ArrayList<>();
     Collections.addAll(fragments, BlankFragment.newInstance(Color.RED),
-        BlankFragment.newInstance(Color.YELLOW));
+        BlankFragment.newInstance(Color.YELLOW),
+        BlankFragment.newInstance(Color.YELLOW),
+        BlankFragment.newInstance(Color.YELLOW),
+        BlankFragment.newInstance(Color.YELLOW)
+    );
     tabLayout.setViewPager(vpContent,
-        new String[]{"已下载", "下载中"},
+        new String[]{"已下载", "下载中", "下载中", "下载中", "下载中"},
         getSupportFragmentManager(),
         fragments
     );
@@ -37,13 +41,14 @@ public class MainActivity extends AppCompatActivity {
 //    );
 //    tabLayout.setCurrentTab(0);
 
-    AlignBottomPlugin.apply(tabLayout);
+    AlignBottomPlugin.applyTo(tabLayout);
+//    SmoothScaleTitleSizePlugin.applyTo(tabLayout);
 
-    DownloadTabPluginApi helper = DownloadTabPlugin.apply(tabLayout);
-    helper.showDotAt(0);
-    helper.showSubscriptNumberAt(0, "19");
-    helper.showDotAt(1);
-    helper.showSubscriptNumberAt(1, "19000000000000000000");
+    DownloadTabPluginApi plugin = DownloadTabPlugin.applyTo(tabLayout);
+    plugin.showDotAt(0);
+    plugin.showSubscriptNumberAt(0, "19");
+    plugin.showDotAt(1);
+    plugin.showSubscriptNumberAt(1, "19000000000000000000");
 
 //    tabLayout.addTab("BLACK", BlankFragment.newInstance(Color.BLACK));
 //    tabLayout.addTab("CYAN", BlankFragment.newInstance(Color.CYAN));
